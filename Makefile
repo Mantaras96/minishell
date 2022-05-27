@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albertmantaras <albertmantaras@student.    +#+  +:+       +#+         #
+#    By: amantara <amantara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 00:26:11 by albertmanta       #+#    #+#              #
-#    Updated: 2022/05/26 00:48:32 by albertmanta      ###   ########.fr        #
+#    Updated: 2022/05/27 17:04:11 by amantara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ CFLAGS	= -Wall -Wextra -Werror
 
 objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) -o $@ $^
+	@$(CC) -c $(CFLAGS) -I ~/.brew/opt/readline/include -o $@ $^
 
 all:	$(NAME)
 
 $(NAME): $(OBJ) include/minishell.h
 	@make -C ./ft_printf
-	@$(CC) $(OBJ) ft_printf/libftprintf.a -o $(NAME)
+	@$(CC) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib ft_printf/libftprintf.a -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS_DIR)
