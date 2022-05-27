@@ -6,7 +6,7 @@
 #    By: amantara <amantara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 00:26:11 by albertmanta       #+#    #+#              #
-#    Updated: 2022/05/27 18:38:53 by amantara         ###   ########.fr        #
+#    Updated: 2022/05/27 18:53:36 by amantara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC	=	main.c \
 		../42_get_next_line/get_next_line_utils.c \
 		../42_get_next_line/get_next_line.c \
 		get_pwd.c \
-		print_flowers.c
+		print_flowers.c \
+		get_echo.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
