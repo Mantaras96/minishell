@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 00:30:13 by albertmanta       #+#    #+#             */
-/*   Updated: 2022/05/27 17:05:14 by amantara         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:45:11 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 #	include <stdio.h>
 
 
-int get_pwd();
-int ft_strcmp(const char *str1, const char *str2);
+int     get_pwd();
+int     ft_strcmp(const char *str1, const char *str2);
+void    print_star_minishell();
