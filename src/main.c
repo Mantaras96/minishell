@@ -28,7 +28,9 @@ int main(int argc, char **argv, char **envp)
 		{
 			if(!ft_strcmp(input, "pwd"))
 				get_pwd();
-		}else
+			else if (!ft_strcmp(ft_split(input, ' ')[0], "echo"))
+				get_echo(input);
+		} else
 			exit (1);
 	}
 }
