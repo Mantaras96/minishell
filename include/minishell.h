@@ -15,3 +15,8 @@
 #	include "../42_get_next_line/get_next_line.h"
 #   include <readline/history.h>
 #   include <readline/readline.h>
+# 	include <limits.h>
+#	include <stdio.h>
+
+
+int get_pwd();

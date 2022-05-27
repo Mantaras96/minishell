@@ -23,7 +23,7 @@ void handler(int signum)
 }
 
 
-int main(int argc, char **argv, char **envp){
+int main(){
 	int		fd;
 	char	*aux;
 	int		i = 0;
@@ -37,15 +37,16 @@ int main(int argc, char **argv, char **envp){
 		i++;
 	}
 	close(fd);
-	
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (42)
 	{
 		input = readline("ENCUERAO🦄🦹-->$ ");
 		if (input)
-			printf("hola");
-		else
+		{
+			if(!ft_strncmp(input, "pwd"))
+				get_pwd();
+		}else
 			exit (1);
 	}
 }

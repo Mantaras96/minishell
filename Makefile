@@ -16,6 +16,7 @@ NAME	=	minishell
 SRC	=	main.c \
 		../42_get_next_line/get_next_line_utils.c \
 		../42_get_next_line/get_next_line.c \
+		get_pwd.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
