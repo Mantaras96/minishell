@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albertmantaras <albertmantaras@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 00:30:13 by albertmanta       #+#    #+#             */
-/*   Updated: 2022/05/27 19:24:51 by amantara         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:53:32 by albertmanta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #   include <readline/readline.h>
 # 	include <limits.h>
 #	include <stdio.h>
+
+typedef struct s_minishell
+{
+    char    *input; //Here we will save input comand user. 
+    /* data */
+}               t_minishell;
+
 
 
 int     get_pwd();
