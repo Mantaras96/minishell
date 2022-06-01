@@ -19,7 +19,30 @@
 #	include <stdio.h>
 
 
+typedef struct s_info
+{
+	char *input;
+	char **tokens;
+	int simples;
+	int doubles;
+	int counter;
+	int words;
+
+
+
+}			t_info;
+
+
 int     get_pwd();
 int     ft_strcmp(const char *str1, const char *str2);
 void    print_star_minishell();
 void    get_echo(char *str);
+void	parsing(t_info *info);
+void	counter(t_info *info);
+int		simples(int i, t_info *info);
+int		doubles(int i, t_info *info);
+void	create_tokens(t_info *info);
+int		create_doubles(int i, t_info *info);
+int		create_simples (int i, t_info *info);
+int		create_word(t_info *info, int i, char charact);
+int		word_length(t_info *info, int i, char charact);

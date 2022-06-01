@@ -18,7 +18,9 @@ SRC	=	main.c \
 		../42_get_next_line/get_next_line.c \
 		get_pwd.c \
 		print_flowers.c \
-		get_echo.c
+		get_echo.c \
+		parsing.c \
+		tokens.c 
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

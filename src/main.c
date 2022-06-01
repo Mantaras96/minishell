@@ -10,26 +10,33 @@ void handler(int signum)
 	}
 }
 
-
 int main(int argc, char **argv, char **envp)
 {
-	char *input;
+	t_info *info;
 
 	(void)argc;
 	(void)argv;
 	(void)envp;
 	print_star_minishell();
+	info = (t_info *)malloc(sizeof(t_info));
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (42)
 	{
-		input = readline("ENCUERAO🦄🦹-->$ ");
-		if (input)
+		info->doubles = 0;
+		info->simples = 0;
+		info->counter = 0;
+		info->words = 0;
+		info->input = readline("ENCUERAO🦄🦹-->$ ");
+		if (info->input)
 		{
-			if(!ft_strcmp(input, "pwd"))
+			parsing(info);
+			//printf("hola");
+			/*if(!ft_strcmp(info->input, "pwd"))
 				get_pwd();
-			else if (!ft_strcmp(ft_split(input, ' ')[0], "echo"))
-				get_echo(input);
+			else if (!ft_strcmp(ft_split(info->input, ' ')[0], "echo"))
+				get_echo(info->input);
+				*/
 		} else
 			exit (1);
 	}
