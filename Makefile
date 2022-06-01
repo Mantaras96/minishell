@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: amantara <amantara@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/22 00:26:11 by albertmanta       #+#    #+#              #
-#    Updated: 2022/05/27 18:53:36 by amantara         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 NAME	=	minishell
 
 SRC	=	main.c \
@@ -20,7 +7,8 @@ SRC	=	main.c \
 		print_flowers.c \
 		get_echo.c \
 		parsing.c \
-		tokens.c 
+		tokens.c \
+		start_minishell.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

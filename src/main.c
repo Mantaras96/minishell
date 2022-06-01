@@ -1,5 +1,5 @@
 #include "../include/minishell.h"
-#include <fcntl.h>
+
 
 void handler(int signum)
 {
@@ -31,12 +31,14 @@ int main(int argc, char **argv, char **envp)
 		if (info->input)
 		{
 			parsing(info);
+
 			//printf("hola");
 			/*if(!ft_strcmp(info->input, "pwd"))
 				get_pwd();
 			else if (!ft_strcmp(ft_split(info->input, ' ')[0], "echo"))
 				get_echo(info->input);
 				*/
+			start_minishell(info);
 		} else
 			exit (1);
 	}

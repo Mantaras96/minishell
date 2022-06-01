@@ -50,10 +50,15 @@ int create_doubles(int i, t_info *info)//creamos la palabra que esta entre comil
 	int j;
 
 	j = 1;
-	if (info->input[i + j] == 34)
+	if (info->input[i + j] == 34){
 		j++;
-	else
+	}
+	else{
+		ft_putstr_fd("Numero:", 1);
+		ft_putnbr_fd(i,1);
 		j += create_word(info, i + j, 34);
+	}
+
 	return (j);
 }
 
