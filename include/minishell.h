@@ -26,6 +26,7 @@ typedef struct s_info
 	int words;
     int pipe_command;
     int redirect;
+	char	**envp;
 }			t_info;
 
 

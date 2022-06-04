@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	info->envp = ft_strdup_matrix(envp);
 	print_star_minishell();
 	info = (t_info *)malloc(sizeof(t_info));
 	signal(SIGINT, handler);
