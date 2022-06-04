@@ -6,6 +6,7 @@
 # 	include <limits.h>
 #	include <stdio.h>
 #   include <fcntl.h>
+#	include <term.h>
 
 typedef struct s_minishell
 {
@@ -44,5 +45,5 @@ int		word_length(t_info *info, int i, char charact);
 //Start (start_minishell.c)
 void    start_minishell(t_info *info);
 void    start_no_pipe(t_info *info);
-void    check_pipe_command(t_info *info);
+int    check_pipe_command(t_info *info);
 //End (start_minishell.c)

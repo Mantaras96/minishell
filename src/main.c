@@ -10,6 +10,15 @@ void handler(int signum)
 	}
 }
 
+void init_info(t_info *info)
+{
+	info->doubles = 0;
+	info->simples = 0;
+	info->counter = 0;
+	info->words = 0;
+	info->redirect = 0;
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	t_info *info;
@@ -21,24 +30,14 @@ int main(int argc, char **argv, char **envp)
 	info = (t_info *)malloc(sizeof(t_info));
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
+	init_info(info);
 	while (42)
 	{
-		info->doubles = 0;
-		info->simples = 0;
-		info->counter = 0;
-		info->words = 0;
-		info->input = readline("ENCUERAO🦄🦹-->$ ");
+		info->input = readline("\033[1;33mENCUERAO🦄🦹--->$ \033[1;00m");
 		if (info->input)
 		{
 			parsing(info);
-			//parsing_encuerado(info);
-			//printf("hola");
-			/*if(!ft_strcmp(info->input, "pwd"))
-				get_pwd();
-			else if (!ft_strcmp(ft_split(info->input, ' ')[0], "echo"))
-				get_echo(info->input);
-				*/
-			//start_minishell(info);
+			start_minishell(info);
 
 		} else
 			exit (1);

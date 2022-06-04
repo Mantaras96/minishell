@@ -86,7 +86,7 @@ void parsing(t_info *info) //recorremos hasta el final, contamos las comilla sim
 	}
 
 	counter(info); 
-	printf("Counter:%d\n", info->counter);
+	//printf("Counter:%d\n", info->counter);
 	info->tokens = (char **)malloc(sizeof(char *) * (info->counter + 1));
 	info->tokens[info->counter] = 0;
 	if (!info->simples && !info->doubles){

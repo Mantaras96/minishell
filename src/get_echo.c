@@ -14,7 +14,7 @@ void get_echo(t_info *info)
             flag = 1;
             i++;
         }
-        while (info->tokens[i] && i <= info->counter)
+        while (i < info->counter)
         {
             printf("%s", info->tokens[i]);
             i++;
