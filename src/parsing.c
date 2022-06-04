@@ -76,17 +76,31 @@ void parsing(t_info *info) //recorremos hasta el final, contamos las comilla sim
 			info->simples++;
 		i++;
 	}
+	if (info->doubles > 0 && info->doubles % 2 == 1){
+		printf("Error no estan las comillas cerradas\n");
+		return;
+	}
+		if (info->simples > 0 && info->simples % 2 == 1){
+		printf("Error no estan las comillas cerradas\n");
+		return;
+	}
 
 	counter(info); 
+	printf("Counter:%d\n", info->counter);
 	info->tokens = (char **)malloc(sizeof(char *) * (info->counter + 1));
 	info->tokens[info->counter] = 0;
-	create_tokens(info);
-
-	i = 0; 
-	printf("\n%d\n", info->counter);
-	while (info->tokens[i])
-	{
-		printf("%s\n", info->tokens[i]);
-		i++;
+	if (!info->simples && !info->doubles){
+		info->tokens = ft_split(info->input, 32);
+	} else {
+		create_tokens(info);
 	}
+
+
+	// i = 0; 
+	// printf("\n%d\n", info->counter);
+	// while (info->tokens[i])
+	// {
+	// 	printf("%s\n", info->tokens[i]);
+	// 	i++;
+	// }
 }
