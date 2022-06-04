@@ -8,7 +8,8 @@ SRC	=	main.c \
 		get_echo.c \
 		parsing.c \
 		tokens.c \
-		start_minishell.c
+		start_minishell.c \
+		ft_strjoin.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

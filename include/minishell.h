@@ -46,4 +46,5 @@ int		word_length(t_info *info, int i, char charact);
 void    start_minishell(t_info *info);
 void    start_no_pipe(t_info *info);
 int    check_pipe_command(t_info *info);
+char	*ft_strjoin(char const *s1, char const *s2);
 //End (start_minishell.c)

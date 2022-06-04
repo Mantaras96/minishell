@@ -31,9 +31,13 @@ int main(int argc, char **argv, char **envp)
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	init_info(info);
+	char *pwd = NULL;
 	while (42)
 	{
-		info->input = readline("\033[1;33mENCUERAO🦄🦹--->$ \033[1;00m");
+		pwd = getcwd(pwd, sizeof(pwd));
+		pwd = ft_strjoin("\033[1;33m", pwd);
+
+		info->input = readline(ft_strjoin(pwd, "--ENCUERAO🦄🦹--->$ \033[1;00m"));
 		if (info->input)
 		{
 			parsing(info);
