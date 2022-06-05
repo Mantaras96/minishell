@@ -41,7 +41,6 @@ void init_env(t_info *info, char **argv){
 	// aux = get_env_value("_", info->envp, 1);
 	// if (!aux)
 	// 	info->envp = set_env("_", argv[0], info->envp, 1);
-		write (1, "Y", 1);
 }
 
 int main(int argc, char **argv, char **envp)
