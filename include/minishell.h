@@ -47,5 +47,15 @@ int		word_length(t_info *info, int i, char charact);
 void    start_minishell(t_info *info);
 void    start_no_pipe(t_info *info);
 int    check_pipe_command(t_info *info);
-char	*ft_strjoin(char const *s1, char const *s2);
-//End (start_minishell.c)
+//Utils matrix (utils_matrix.c)
+void	free_matrix(char ***matrix);
+char	**add_value_matrix(char **matrix, char *newstr);
+int		ft_matrix_len(char **matrix);
+char	**ft_strdup_matrix(char **matrix);
+char	**matrix_delete_element(char **matrix, int j);
+//Get env (get_env.c)
+char	**set_env(char *var, char *value, char **envp, int n);
+
+int		search_value_string(char *argv, int value);
+char	*get_env_value(char *var, char **envp, int n);
+int count_var_envp(char *token, char **envp, int *j);

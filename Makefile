@@ -9,7 +9,9 @@ SRC	=	main.c \
 		parsing.c \
 		tokens.c \
 		start_minishell.c \
-		ft_strjoin.c
+		utils_matrix.c \
+		get_env.c \
+		get_export.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

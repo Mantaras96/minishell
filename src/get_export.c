@@ -8,73 +8,84 @@ int search_value_string(char *argv, int value){
         return (-1);
     while (argv[i])
     {
-        if (argv[i] == value)
+        if (argv[i] == (unsigned char)value)
             return (i);   
         i++;
     }
+    if ((unsigned char)value == '\0')
+		return (i);
     return (-1);
 }
 
-static int	var_in_envp(char *argv, char **envp,int i, int j){
-    int pos;
-    j = 0;
-
-    pos = search_value_string(argv, '=');
-    if (pos == -1)
-        return (-1);
-    while (j)
-    {
-        if (!ft_strncmp(envp[j], argv, pos + 1));
-            return (1);
-        j++;
-    }
-    return (0);
-}
-
-
-void get_cd(t_info *info)
-{
+//Agregar valor a la matrix de info envp.
+// Si pos existe modificamos el valor mientras que si no existe creamos una nueva en la matrix.
+int get_export(t_info *info){
 
     int i;
     int j;
     int pos;
 
     i = 0;
+    j = 0;
     if (!info->pipe_command && !info->redirect)
     {
         if (info->counter >= 2) {
             while(i < info->counter)
             {
-                pos = count_var_envp(info->tokens[i], info->envp, i, j);
+                pos = count_var_envp(info->tokens[i], info->envp, &j);
                 if (pos == 1)
                 {
                     free(info->envp[j]);
                     info->envp[j] = ft_strdup(info->tokens[i]);  
                 } else if (!pos)
-				    info->envp = ft_extend_matrix(info->envp, info->tokens[i]);
+				    info->envp = add_value_matrix(info->envp, info->tokens[i]);
 			i++;
             }
         }
     }
-        
+    return (0);
+}
+
+int count_var_envp(char *token, char **envp, int *j)
+{
+    int aux;
+    int i;
+
+    i = 0;
+    aux = search_value_string(token, '=');
+    if (!aux)
+        return (-1);
+    while(envp[i]){
+        if (!ft_strncmp(envp[i], token, aux + 1))
+            return (1);
+        i++;
+        *j = i;
     }
+    return (0);
+}
 
-    // flag = 0;
-    // len = 0;
-    // i = 0;
+//Eliminar un  valor de la matrix de info envp.
+int get_unset(t_info *info){
 
-    // if (!ft_strcmp(ft_split(str, ' ')[1], "-n"))
-    //     flag = 1;
-    // while (str[i])
-    // {
-    //     if( ft_isalpha(str[i]) || str[i] == '-')
-    //         len++;
-    //     if (((len > 4 && flag == 0) || (len > 6 && flag == 1)) && (i != (int)ft_strlen(str) - 1)) {
-    //         write(1, &str[i], 1);
-    //     }
-    //     i++;
-    // }
-    // if (str[i - 1] != 34 && str[i - 1] != 39)
-    //     printf("%c\n", str[i - 1]);
-    // else
-    //     printf("\n");
+    int i;
+    int j;
+    int pos;
+
+    i = 1;
+    j = 0;
+    if (!info->pipe_command && !info->redirect)
+    {
+        if (info->counter >= 2) {
+            while (info->tokens[i]){
+            pos =  count_var_envp(info->tokens[i], info->envp, &j);
+            if (!pos)
+                return (0);
+            else 
+                info->envp = matrix_delete_element(info->envp, j);
+            i++;
+            }
+
+        }
+    }
+    return (0);
+}
