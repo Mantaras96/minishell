@@ -7,7 +7,6 @@ char **set_env(char *var, char *value, char **envp, int n)
     int i;
     int j;
     char *aux1;
-
     if (n < 0)
         n = ft_strlen(var);
     i = 0;

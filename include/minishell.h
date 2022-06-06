@@ -18,15 +18,16 @@ typedef struct s_minishell
 
 typedef struct s_info
 {
-	char *input;
-	char **tokens;
-	int simples;
-	int doubles;
-	int counter;
-	int words;
-    int pipe_command;
-    int redirect;
+	char	*input;
+	char	**tokens;
+	int		simples;
+	int		doubles;
+	int		counter;
+	int		words;
+    int		pipe_command;
+    int		redirect;
 	char	**envp;
+	char	*path;
 }			t_info;
 
 
