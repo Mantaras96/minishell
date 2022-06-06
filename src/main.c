@@ -3,11 +3,31 @@
 
 void handler(int signum)
 {
-	if(signum == SIGINT){
+	if(signum == SIGINT)
+	{
 		printf("\n");
 		rl_on_new_line();
-		rl_redisplay();
 	}
+	else if (signum  == SIGQUIT)
+		rl_replace_line("", 1);
+	rl_on_new_line();
+	rl_redisplay();
+}
+
+int signal_handler()
+{
+	struct termios termi;
+
+	if (tcgetattr(STDIN_FILENO, &termi) == -1)
+		return (0);
+	termi.c_lflag &= ~(ECHOCTL);
+	if(tcsetattr(STDIN_FILENO, TCSANOW, &termi) == -1)
+		return (0);
+	if(signal(SIGINT, handler))
+		return (0);
+	if(signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		return (0);
+	return (1);
 }
 
 void init_info(t_info *info, char **envp)
@@ -50,23 +70,25 @@ void init_env(t_info *info, char **argv){
 int main(int argc, char **argv, char **envp)
 {
 	t_info *info;
+	int boo;
 
+	boo = 0;
 	(void)argc;
 	info = (t_info *)malloc(sizeof(t_info));
 	init_info(info, envp);
 	init_env(info, argv);
 	print_star_minishell();
-
-	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
+	if (signal_handler() == 0)
+		return (0);
 
 	while (42)
 	{
 		info->input = readline(info->prompt);
 		if (info->input)
 		{
-			parsing(info);
-			start_minishell(info);
+			boo = parsing(info);
+			if(boo == 1)
+				start_minishell(info);
 		} else
 			exit (1);
 		free(info->input);

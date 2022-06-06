@@ -64,7 +64,7 @@ void counter(t_info *info)//Vamos recorriendo si hay una comilla doble o simple,
 	}
 }
 
-void parsing(t_info *info) //recorremos hasta el final, contamos las comilla simples, y las dobles.
+int parsing(t_info *info) //recorremos hasta el final, contamos las comilla simples, y las dobles.
 {
 	int i;
 	i = 0;
@@ -78,11 +78,15 @@ void parsing(t_info *info) //recorremos hasta el final, contamos las comilla sim
 	}
 	if (info->doubles > 0 && info->doubles % 2 == 1){
 		printf("Error no estan las comillas cerradas\n");
-		return;
+		info->simples = 0;
+		info->doubles = 0;
+		return (0);
 	}
-		if (info->simples > 0 && info->simples % 2 == 1){
+	if (info->simples > 0 && info->simples % 2 == 1){
 		printf("Error no estan las comillas cerradas\n");
-		return;
+		info->simples = 0;
+		info->doubles = 0;
+		return(0);
 	}
 
 	counter(info); 
@@ -94,6 +98,7 @@ void parsing(t_info *info) //recorremos hasta el final, contamos las comilla sim
 	} else {
 		create_tokens(info);
 	}
+	return (1);
 
 
 	// i = 0; 

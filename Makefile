@@ -11,7 +11,8 @@ SRC	=	main.c \
 		start_minishell.c \
 		utils_matrix.c \
 		get_env.c \
-		get_export.c
+		get_export.c \
+		get_exit.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

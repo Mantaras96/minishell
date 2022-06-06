@@ -119,25 +119,5 @@ void create_tokens(t_info *info)
 
 		i = 0;
 		str = ft_split_all(info->input, info);
-		write(1, "x", 1);
-		// while (str[i]){
-		// 	printf("%s", str[i]);
-		// 	i++;
-		// }
+		info->tokens = ft_strdup_matrix(str);
 }
-
-
-	// int i;
-
-	// i = 0;
-	// while (info->input[i])
-	// {
-	// 	if (info->input[i] == 32)
-	// 		i++;
-	// 	else if(info->input[i] == 34)
-	// 		i += create_doubles(i, info);
-	// 	else if(info->input[i] == 39)
-	// 		i += create_simples(i, info);
-	// 	else
-	// 		i += create_word(info, i, 32);
-	// }

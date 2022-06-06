@@ -7,14 +7,8 @@
 #	include <stdio.h>
 #   include <fcntl.h>
 #	include <term.h>
-
-typedef struct s_minishell
-{
-    char    *input; //Here we will save input comand user. 
-    /* data */
-}               t_minishell;
-
-
+#	include <termios.h>
+#	include <signal.h>
 
 typedef struct s_info
 {
@@ -35,7 +29,7 @@ int     get_pwd();
 int     ft_strcmp(const char *str1, const char *str2);
 void    print_star_minishell();
 void    get_echo(t_info *info);
-void	parsing(t_info *info);
+int	parsing(t_info *info);
 void	counter(t_info *info);
 int		simples(int i, t_info *info);
 int		doubles(int i, t_info *info);
@@ -59,4 +53,6 @@ char	**set_env(char *var, char *value, char **envp, int n);
 
 int		search_value_string(char *argv, int value);
 char	*get_env_value(char *var, char **envp, int n);
-int count_var_envp(char *token, char **envp, int *j);
+int		count_var_envp(char *token, char **envp, int *j);
+void	get_exit(t_info *info);
+void	free_tokens(t_info *info);
