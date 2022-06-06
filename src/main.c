@@ -12,12 +12,15 @@ void handler(int signum)
 
 void init_info(t_info *info, char **envp)
 {	
+	char *aux;
+
 	info->doubles = 0;
 	info->simples = 0;
 	info->counter = 0;
 	info->words = 0;
 	info->redirect = 0;
-	info->path = getcwd(NULL, 0);
+	aux = ft_strjoin("\033[1;33m", getcwd(NULL, 0));
+	info->prompt = ft_strjoin(aux, "--ENCUERAO🦄🦹--->$ \033[1;00m");
 	info->envp = ft_strdup_matrix(envp);
 }
 
@@ -57,18 +60,13 @@ int main(int argc, char **argv, char **envp)
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 
-	char *pwd = NULL;
 	while (42)
 	{
-		pwd = getcwd(pwd, sizeof(pwd));
-		pwd = ft_strjoin("\033[1;33m", pwd);
-
-		info->input = readline(ft_strjoin(pwd, "--ENCUERAO🦄🦹--->$ \033[1;00m"));
+		info->input = readline(info->prompt);
 		if (info->input)
 		{
 			parsing(info);
 			start_minishell(info);
-
 		} else
 			exit (1);
 		free(info->input);

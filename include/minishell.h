@@ -27,7 +27,7 @@ typedef struct s_info
     int		pipe_command;
     int		redirect;
 	char	**envp;
-	char	*path;
+	char	*prompt;
 }			t_info;
 
 

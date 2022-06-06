@@ -7,7 +7,7 @@ int check_pipe_command(t_info *info)
 
 	i = 0;
 	info->pipe_command = 0;
-	while (i < info->counter)
+	while (info->tokens[i])
 	{
 		if (info->tokens[i][0] == '|')
 		{
