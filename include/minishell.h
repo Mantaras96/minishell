@@ -50,9 +50,17 @@ char	**ft_strdup_matrix(char **matrix);
 char	**matrix_delete_element(char **matrix, int j);
 //Get env (get_env.c)
 char	**set_env(char *var, char *value, char **envp, int n);
+void	get_env(t_info *info);
 
 int		search_value_string(char *argv, int value);
 char	*get_env_value(char *var, char **envp, int n);
 int		count_var_envp(char *token, char **envp, int *j);
 void	get_exit(t_info *info);
 void	free_tokens(t_info *info);
+int count_var_envp(char *token, char **envp, int *j);
+
+//Get (export.c)
+int count_var_envp(char *token, char **envp, int *j);
+int get_unset(t_info *info);
+int get_export(t_info *info);
+int search_value_string(char *argv, int value);

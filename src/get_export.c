@@ -37,8 +37,11 @@ int get_export(t_info *info){
                 {
                     free(info->envp[j]);
                     info->envp[j] = ft_strdup(info->tokens[i]);  
-                } else if (!pos)
+                } else if (!pos){
+                    write(1, "AAAA", 4);
 				    info->envp = add_value_matrix(info->envp, info->tokens[i]);
+                    write(1, "zzz", 4);
+                }
 			i++;
             }
         }
@@ -55,7 +58,7 @@ int count_var_envp(char *token, char **envp, int *j)
     aux = search_value_string(token, '=');
     if (!aux)
         return (-1);
-    while(envp[i]){
+    while(i < ft_matrix_len(envp) - 1){;
         if (!ft_strncmp(envp[i], token, aux + 1))
             return (1);
         i++;
@@ -78,10 +81,12 @@ int get_unset(t_info *info){
         if (info->counter >= 2) {
             while (info->tokens[i]){
             pos =  count_var_envp(info->tokens[i], info->envp, &j);
+            printf("\nPosicion:%d, %d \n", j, pos);
+
             if (!pos)
                 return (0);
             else 
-                info->envp = matrix_delete_element(info->envp, j);
+                //info->envp = matrix_delete_element(info->envp, j);
             i++;
             }
 

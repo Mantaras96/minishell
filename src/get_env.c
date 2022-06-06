@@ -46,3 +46,13 @@ char *get_env_value(char *var, char **envp, int n){
     }
     return (NULL);
 }
+
+void get_env(t_info *info){
+    int i;
+
+    i = 0;
+    while(i < ft_matrix_len(info->envp) - 1){
+        printf("%s\n", info->envp[i]);
+        i++;
+    }
+}
