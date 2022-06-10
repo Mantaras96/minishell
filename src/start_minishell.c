@@ -38,6 +38,8 @@ void start_no_pipe(t_info *info)
 		get_export(info);
 	else if (!ft_strcmp (info->tokens[0], "unset"))
 		get_unset(info);
+	else if (!ft_strcmp (info->tokens[0], "cd"))
+		get_cd(info);
 }
 
 void start_minishell(t_info *info)

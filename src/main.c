@@ -9,7 +9,7 @@ void handler(int signum)
 		rl_on_new_line();
 	}
 	else if (signum  == SIGQUIT)
-		rl_replace_line("", 1);
+		rl_on_new_line();
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -32,16 +32,19 @@ int signal_handler()
 
 void init_info(t_info *info, char **envp)
 {	
-	char *aux;
-
 	info->doubles = 0;
 	info->simples = 0;
 	info->counter = 0;
 	info->words = 0;
 	info->redirect = 0;
+	info->envp = ft_strdup_matrix(envp);
+}
+
+void init_prompt(t_info *info)
+{
+	char *aux;
 	aux = ft_strjoin("\033[1;33m", getcwd(NULL, 0));
 	info->prompt = ft_strjoin(aux, "--ENCUERAO🦄🦹--->$ \033[1;00m");
-	info->envp = ft_strdup_matrix(envp);
 }
 
 //Info de la variable PATH: https://es.ccm.net/ordenadores/linux/2408-bash-la-variable-de-entorno-path/
@@ -82,7 +85,8 @@ int main(int argc, char **argv, char **envp)
 		return (0);
 
 	while (42)
-	{
+	{	
+		init_prompt(info);
 		info->input = readline(info->prompt);
 		if (info->input)
 		{

@@ -38,6 +38,7 @@ int		create_doubles(int i, t_info *info);
 int		create_simples (int i, t_info *info);
 int		create_word(t_info *info, int i, char charact);
 int		word_length(t_info *info, int i, char charact);
+void init_prompt(t_info *info);
 //Start (start_minishell.c)
 void    start_minishell(t_info *info);
 void    start_no_pipe(t_info *info);
@@ -64,3 +65,7 @@ int count_var_envp(char *token, char **envp, int *j);
 int get_unset(t_info *info);
 int get_export(t_info *info);
 int search_value_string(char *argv, int value);
+
+void get_cd(t_info *info);
+void go_home();
+void update_pwd(t_info *info);

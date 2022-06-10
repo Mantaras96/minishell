@@ -12,7 +12,8 @@ SRC	=	main.c \
 		utils_matrix.c \
 		get_env.c \
 		get_export.c \
-		get_exit.c
+		get_exit.c \
+		get_cd.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

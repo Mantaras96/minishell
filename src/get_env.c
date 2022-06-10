@@ -12,14 +12,17 @@ char **set_env(char *var, char *value, char **envp, int n)
     i = 0;
     aux1 = ft_strjoin(var, "=");
     aux1 = ft_strjoin(aux1, value);
-    while(!ft_strchr(aux1, '=') && envp && envp[++i]){
+    while(i < ft_matrix_len(envp)){
         j = n;
         if (j < search_value_string(envp[i], '='))
+        {
             j = search_value_string(envp[i], '=');
+        }
         if (!ft_strncmp(envp[i], var, j)){
             envp[i] = aux1;
             return (envp);
         }
+        i++;
     }
     envp = add_value_matrix(envp, aux1);
     free(aux1);
