@@ -10,12 +10,6 @@ void go_home(t_info *info)
     update_pwd(info);
 }
 
-void go_back(t_info *info)
-{
-    chdir("..");
-    update_pwd(info);
-}
-
 void go_last(t_info *info)
 {
     char *path;
@@ -45,10 +39,14 @@ void update_pwd(t_info *info)
 
 void get_cd(t_info *info)
 {
-  if (!ft_strcmp(info->tokens[0], "cd") && info->counter == 1)
+  if ((!ft_strcmp(info->tokens[0], "cd") && info->counter == 1 )
+    || (!ft_strcmp(info->tokens[1], "~") && info->counter == 2))
     go_home(info);
   else if(!ft_strcmp(info->tokens[1], "..") && info->counter == 2)
-    go_back(info);
+  {
+    chdir("..");
+    update_pwd(info);
+  }
   else if(!ft_strcmp(info->tokens[1], "-") && info->counter == 2)
     go_last(info);
   else

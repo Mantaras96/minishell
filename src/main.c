@@ -89,6 +89,7 @@ int main(int argc, char **argv, char **envp)
 		info->input = readline(info->prompt);
 		if (info->input)
 		{
+			add_history(info->input);
 			boo = parsing(info);
 			if(boo == 1)
 				start_minishell(info);
