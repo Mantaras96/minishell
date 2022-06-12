@@ -25,13 +25,13 @@ char **add_value_matrix(char **matrix, char *newstr){
 	i = 0;
 	len = ft_matrix_len(matrix);
 	n_matrix = malloc(sizeof(char *) * (ft_matrix_len(matrix) + 2));
+	n_matrix[len + 1] = NULL;
 	while (i < len)
 	{
 		n_matrix[i] = ft_strdup(matrix[i]);
 		i++;
 	}
-	n_matrix[++i] = ft_strdup(newstr);
-	n_matrix[i] = NULL;
+	n_matrix[i] = ft_strdup(newstr);
 	free_matrix(&matrix);
 	return (n_matrix);
 }

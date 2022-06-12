@@ -83,7 +83,6 @@ int main(int argc, char **argv, char **envp)
 	print_star_minishell();
 	if (signal_handler() == 0)
 		return (0);
-
 	while (42)
 	{	
 		init_prompt(info);
