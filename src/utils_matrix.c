@@ -61,6 +61,7 @@ char	**ft_strdup_matrix(char **matrix)
 		i++;
 	}
 	m_return[i] = NULL;
+	free_matrix(&matrix);
 	return (m_return);
 }
 

@@ -54,20 +54,23 @@ void init_env(t_info *info, char **argv){
 	(void)argv;
 	aux = getcwd(NULL ,0);
 	info->envp = set_env("PWD", aux, info->envp, 3);
+	free(aux);
 	aux = get_env_value("SHLVL", info->envp, 5);
 	if (!aux)
 		info->envp = set_env("SHLVL", "1", info->envp, 5);
 	else
 		info->envp = set_env("SHLVL", ft_itoa(ft_atoi(aux)), info->envp, 5);
-
+	free(aux);
 	aux = get_env_value("PATH", info->envp, 4);
 	if (!aux){
 	info->envp = set_env("PATH", \
 		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", info->envp, 4);
 	}
+	free(aux);
 	aux = get_env_value("_", info->envp, 1);
 	if (!aux)
 	 	info->envp = set_env("_", argv[0], info->envp, 1);
+	free(aux);
 }
 
 int main(int argc, char **argv, char **envp)
