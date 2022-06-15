@@ -54,6 +54,7 @@ char	**ft_strdup_matrix(char **matrix)
 	int size;
 
 	size = ft_matrix_len(matrix);
+	//printf("MATRIX: %d\n",  size);
 	m_return = malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (matrix[i]){
@@ -61,7 +62,7 @@ char	**ft_strdup_matrix(char **matrix)
 		i++;
 	}
 	m_return[i] = NULL;
-	free_matrix(&matrix);
+	//free_matrix(&matrix);
 	return (m_return);
 }
 

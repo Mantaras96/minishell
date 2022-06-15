@@ -6,62 +6,6 @@
 32 = ' '
 */
 
-int word_length(t_info *info, int i, char charact)//el length de la palabra a partir del caracter si es "", ', ' '
-{
-	int j;
-
-	j = 0;
-	while(info->input[i + j] != charact && info->input[i + j])
-		j++;
-	return(j);
-}
-
-int create_word(t_info *info, int i, char charact)//creamos la palabra y la guardamos en **tokens
-{
-	int j;
-
-	j = 0;
-	info->tokens[info->words] = (char *)malloc(sizeof(char) * (word_length(info, i, charact) + 1));
-	while (info->input[i + j] != charact && info->input[i + j])
-	{
-		info->tokens[info->words][j] = info->input[i + j];
-		j++;
-	}
-	info->tokens[info->words][j] = 0;
-	info->words++;
-	return(word_length(info, i, charact));
-}
-
-
-int create_simples (int i, t_info *info)//creamos la palabra que esta entre comillas simples
-{
-	int j;
-
-	j = 1;
-	if (info->input[i + j] == 39)
-		j++;
-	else
-		j += create_word(info, i + j, 39);
-	return (j);
-}
-
-int create_doubles(int i, t_info *info)//creamos la palabra que esta entre comillas dobles
-{
-	int j;
-
-	j = 1;
-	if (info->input[i + j] == 34){
-		j++;
-	}
-	else{
-		ft_putstr_fd("Numero:", 1);
-		ft_putnbr_fd(i,1);
-		j += create_word(info, i + j, 34);
-	}
-
-	return (j);
-}
-
 int ft_is_space(char c, int comillas){
 	if (!comillas)
 	{
@@ -97,9 +41,17 @@ char **ft_split_all(char *str, t_info *info){
             size++;
             i++;
         }
-        buff[j] = malloc(sizeof (char) * (size + 1));
+        if (comillas){
+        	buff[j] = malloc(sizeof (char) * (size + 3));
+        	size++;
+        	size++;
+        	i++;
+        } else {
+        	buff[j] = malloc(sizeof (char) * (size + 1));
+        }
+
         k = 0;
-        while(size){
+        while(size){ 
             buff[j][k] = str[i - size];
             size--;
             k++;
@@ -108,6 +60,8 @@ char **ft_split_all(char *str, t_info *info){
         j++;
 		comillas = 0;
     }
+    buff[j] = 0;
+    printf("PALABRAS: %d\n", j);
     return (buff);
 }
 
@@ -118,6 +72,11 @@ void create_tokens(t_info *info)
 		int i;
 
 		i = 0;
+		write(1, "z", 1);
 		str = ft_split_all(info->input, info);
+		write(1, "x", 1);
+		printf("MATRIX: %d\n",  ft_matrix_len(str));
 		info->tokens = ft_strdup_matrix(str);
+		write(1, "y", 1);
+		//free_matrix(&str);
 }

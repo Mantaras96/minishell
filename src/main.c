@@ -56,21 +56,25 @@ void init_env(t_info *info, char **argv){
 	info->envp = set_env("PWD", aux, info->envp, 3);
 	free(aux);
 	aux = get_env_value("SHLVL", info->envp, 5);
-	if (!aux)
+	if (!aux){
 		info->envp = set_env("SHLVL", "1", info->envp, 5);
+		free(aux);
+	}
 	else
 		info->envp = set_env("SHLVL", ft_itoa(ft_atoi(aux)), info->envp, 5);
-	free(aux);
+	
 	aux = get_env_value("PATH", info->envp, 4);
 	if (!aux){
 	info->envp = set_env("PATH", \
 		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", info->envp, 4);
+		free(aux);
 	}
-	free(aux);
+	
 	aux = get_env_value("_", info->envp, 1);
-	if (!aux)
+	if (!aux){
 	 	info->envp = set_env("_", argv[0], info->envp, 1);
-	free(aux);
+		free(aux);
+	}
 }
 
 int main(int argc, char **argv, char **envp)
@@ -93,9 +97,13 @@ int main(int argc, char **argv, char **envp)
 		if (info->input)
 		{
 			add_history(info->input);
+
 			boo = parsing(info);
-			if(boo == 1)
-				start_minishell(info);
+			if(boo == 1){
+			// 	start_minishell(info);
+				free_tokens(info);
+			}
+
 		} else
 			exit (1);
 		free(info->input);

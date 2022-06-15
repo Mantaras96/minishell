@@ -89,22 +89,26 @@ int parsing(t_info *info) //recorremos hasta el final, contamos las comilla simp
 		return(0);
 	}
 	info->counter = 0;
-	counter(info); 
+	counter(info);
+	printf("%s%d\n", "NUM: ", info->counter);
 	info->tokens = (char **)malloc(sizeof(char *) * (info->counter + 1));
 	info->tokens[info->counter] = 0;
 	if (!info->simples && !info->doubles){
 		info->tokens = ft_split(info->input, 32);
+
 	} else {
 		create_tokens(info);
 	}
-	return (1);
+	// return (1);
 
 
-	// i = 0; 
-	// printf("\n%d\n", info->counter);
-	// while (info->tokens[i])
-	// {
-	// 	printf("%s\n", info->tokens[i]);
-	// 	i++;
-	// }
+	i = 0; 
+	while (info->tokens[i])
+	{
+		printf("%s\n", info->tokens[i]);
+		i++;
+	}
+	info->simples = 0;
+	info->doubles = 0;
+	return(0);
 }

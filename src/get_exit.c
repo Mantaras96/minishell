@@ -19,6 +19,8 @@ void get_exit(t_info *info)
 	free_tokens(info);
 	free(info->input);
 	free(info->prompt);
-	//free_matrix(&info->envp);
+	free_matrix(&info->envp);
+	free(info->envp);
+	free(info);
 	exit(0);
 }
