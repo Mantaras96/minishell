@@ -22,6 +22,7 @@ typedef struct s_info
     int		redirect;
 	char	**envp;
 	char	*prompt;
+	int		pid;
 }			t_info;
 
 
@@ -69,3 +70,6 @@ int search_value_string(char *argv, int value);
 void get_cd(t_info *info);
 void go_home();
 void update_pwd(t_info *info);
+//Expanding
+int expanding (t_info *info);
+char	*expand_home(char *str, int i, int quotes[2], t_info *info);

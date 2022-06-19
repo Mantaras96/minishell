@@ -74,9 +74,6 @@ void create_tokens(t_info *info)
 		i = 0;
 		write(1, "z", 1);
 		str = ft_split_all(info->input, info);
-		write(1, "x", 1);
-		printf("MATRIX: %d\n",  ft_matrix_len(str));
 		info->tokens = ft_strdup_matrix(str);
-		write(1, "y", 1);
 		//free_matrix(&str);
 }

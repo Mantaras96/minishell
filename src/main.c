@@ -1,5 +1,6 @@
 #include "../include/minishell.h"
 
+int	g_status;
 
 void handler(int signum)
 {
@@ -37,6 +38,7 @@ void init_info(t_info *info, char **envp)
 	info->counter = 0;
 	info->words = 0;
 	info->redirect = 0;
+	info->pid = 999;
 	info->envp = ft_strdup_matrix(envp);
 }
 
@@ -100,6 +102,7 @@ int main(int argc, char **argv, char **envp)
 
 			boo = parsing(info);
 			if(boo == 1){
+			boo = expanding(info);
 			// 	start_minishell(info);
 				free_tokens(info);
 			}
