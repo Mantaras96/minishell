@@ -114,6 +114,7 @@ int main(int argc, char **argv, char **envp)
 				boo = expanding(info);
 				execute_other_commands(info);
 				// 	start_minishell(info);
+				start_minishell(info);
 				free_tokens(info);
 			}
 		} else
