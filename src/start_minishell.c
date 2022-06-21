@@ -19,6 +19,30 @@ int check_pipe_command(t_info *info)
 	return (0);
 }
 
+void execute_other_commands(t_info *info){
+	DIR		*dir;
+	char 	*s;
+	//info->tokens[0] = "-la";
+	write(1, "S", 1);
+	s = info->prompt;
+	dir = NULL;
+	dir = opendir("/bin");
+	//exists = stat("/bin/setso", NULL);
+    if( access( "/bin/ls", F_OK ) != -1)
+    {
+        printf("\nfile is found");
+    }
+    else
+    {
+    printf("\nfile is not found");
+    }
+	// if(dir) {
+	// 	//printf("Holaa");
+	// 	execve("/bin/ls", info->tokens, info->envp);
+	// }
+	write(1, "no", 2);
+}
+
 void start_no_pipe(t_info *info)
 {
 
@@ -40,6 +64,9 @@ void start_no_pipe(t_info *info)
 		get_unset(info);
 	else if (!ft_strcmp (info->tokens[0], "cd"))
 		get_cd(info);
+	else {
+		execute_other_commands(info);
+	}
 }
 
 void start_minishell(t_info *info)

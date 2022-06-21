@@ -9,6 +9,8 @@
 #	include <term.h>
 #	include <termios.h>
 #	include <signal.h>
+#	include <dirent.h>
+#	include <sys/stat.h>
 
 typedef struct s_info
 {
@@ -71,5 +73,6 @@ void get_cd(t_info *info);
 void go_home();
 void update_pwd(t_info *info);
 //Expanding
-int expanding (t_info *info);
+int		expanding (t_info *info);
 char	*expand_home(char *str, int i, int quotes[2], t_info *info);
+void	execute_other_commands(t_info *info);

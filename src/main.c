@@ -31,6 +31,16 @@ int signal_handler()
 	return (1);
 }
 
+void	mini_getpid(t_info *info){
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0 || !pid)
+		exit(1);
+	waitpid(pid, NULL, 0);
+	info->pid = pid - 1;
+}
+
 void init_info(t_info *info, char **envp)
 {	
 	info->doubles = 0;
@@ -38,8 +48,8 @@ void init_info(t_info *info, char **envp)
 	info->counter = 0;
 	info->words = 0;
 	info->redirect = 0;
-	info->pid = 999;
 	info->envp = ft_strdup_matrix(envp);
+	mini_getpid(info);
 }
 
 void init_prompt(t_info *info)
@@ -102,6 +112,7 @@ int main(int argc, char **argv, char **envp)
 			boo = parsing(info);
 			if(boo == 1){
 				boo = expanding(info);
+				execute_other_commands(info);
 				// 	start_minishell(info);
 				free_tokens(info);
 			}
