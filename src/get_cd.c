@@ -1,29 +1,41 @@
 #include "../include/minishell.h"
 
-void go_home(t_info *info)
+extern int	g_status;
+
+int go_home(t_info *info)
 {
+    g_status = 0;
     char *path;
     path = get_env_value("HOME", info->envp, 4);
-    if (chdir(path))
+    if (chdir(path)){
         printf("%s%s\n", info->tokens[0],
          ": HOME not set");
+        g_status = 1;
+    }
     update_pwd(info);
+     return (g_status);
 }
 
-void go_last(t_info *info)
+int go_last(t_info *info)
 {
+    g_status = 0;
     char *path;
     path = get_env_value("OLDPWD", info->envp, 6);
     chdir(path);
     update_pwd(info);
+   return (g_status);
 }
 
-void go_path(t_info *info)
+int go_path(t_info *info)
 {
-    if(chdir(info->tokens[1]))
+    g_status = 0;
+    if(chdir(info->tokens[1])){
         printf("%s%s%s\n", info->tokens[0],
          ": no such file or directory: ", info->tokens[1]);
+         g_status = 1;
+    }
     update_pwd(info);
+    return (g_status);
 }
 
 void update_pwd(t_info *info)
@@ -37,18 +49,20 @@ void update_pwd(t_info *info)
     info->envp = set_env("PWD", pwd, info->envp, 3);
 }
 
-void get_cd(t_info *info)
+int get_cd(t_info *info)
 {
   if ((!ft_strcmp(info->tokens[0], "cd") && info->counter == 1 )
     || (!ft_strcmp(info->tokens[1], "~") && info->counter == 2))
-    go_home(info);
+    g_status = go_home(info);
   else if(!ft_strcmp(info->tokens[1], "..") && info->counter == 2)
   {
     chdir("..");
     update_pwd(info);
   }
   else if(!ft_strcmp(info->tokens[1], "-") && info->counter == 2)
-    go_last(info);
+     g_status = go_last(info);
   else
-    go_path(info);
+     g_status = go_path(info);
+
+  return(g_status);
 }

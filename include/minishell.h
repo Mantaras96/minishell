@@ -67,8 +67,8 @@ int get_unset(t_info *info);
 int get_export(t_info *info);
 int search_value_string(char *argv, int value);
 
-void get_cd(t_info *info);
-void go_home();
+int get_cd(t_info *info);
+int go_home();
 void update_pwd(t_info *info);
 //Expanding
 int expanding (t_info *info);

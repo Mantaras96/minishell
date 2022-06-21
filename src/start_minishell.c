@@ -1,5 +1,6 @@
 #include "../include/minishell.h"
 
+extern int g_status;
 /* Si encontramos un pipe enviaremos un 1 se mantiene a 0 sino */ 
 int check_pipe_command(t_info *info)
 {
@@ -39,7 +40,7 @@ void start_no_pipe(t_info *info)
 	else if (!ft_strcmp (info->tokens[0], "unset"))
 		get_unset(info);
 	else if (!ft_strcmp (info->tokens[0], "cd"))
-		get_cd(info);
+		g_status = get_cd(info);
 }
 
 void start_minishell(t_info *info)
