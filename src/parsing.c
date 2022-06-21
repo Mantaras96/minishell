@@ -94,12 +94,8 @@ int parsing(t_info *info) //recorremos hasta el final, contamos las comilla simp
 	info->tokens[info->counter] = 0;
 	if (!info->simples && !info->doubles){
 		info->tokens = ft_split(info->input, 32);
-
-	} else {
+	} else
 		create_tokens(info);
-	}
-	// return (1);
-
 
 	i = 0; 
 	while (info->tokens[i])

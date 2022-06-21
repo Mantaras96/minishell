@@ -47,19 +47,21 @@ static char	*get_substr_var(char *str, int i, t_info *prompt)
 
 
 
-char	*expand_vars(char *str, int i, int quotes[2], t_info *info)
+char	*expand_vars(char *str, int i, t_info *info)
 {
-	quotes[0] = 0;
-	quotes[1] = 0;
+	int q_simples;
+	int q_doubles;
+
+	q_simples = 0;
+	q_doubles= 0;
 	while (str && str[++i])
 	{
-		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
-		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
-		if (!quotes[0] && str[i] == '$' && str[i + 1] && \
-			((ft_strchars_i(&str[i + 1], "/~%^{}:; ") && !quotes[1]) || \
-			(ft_strchars_i(&str[i + 1], "/~%^{}:;\"") && quotes[1])))
-			return (expand_vars(get_substr_var(str, ++i, info), -1, \
-				quotes, info));
+		q_simples = (q_simples + (!q_doubles && str[i] == '\'')) % 2;
+		q_doubles = (q_doubles + (!q_simples && str[i] == '\"')) % 2;
+		if (!q_simples && str[i] == '$' && str[i + 1] && \
+			((ft_strchars_i(&str[i + 1], "/~%^{}:; ") && !q_doubles) || \
+			(ft_strchars_i(&str[i + 1], "/~%^{}:;\"") && q_doubles)))
+			return (expand_vars(get_substr_var(str, ++i, info), -1, info));
 	}
 	return (str);
 }
@@ -70,7 +72,7 @@ int expanding (t_info *info) {
 
 	i = 0;
 	while (info->tokens && info->tokens[i]){
-		info->tokens[i] = expand_vars(info->tokens[i], -1, quotes, info);
+		info->tokens[i] = expand_vars(info->tokens[i], -1, info);
 		info->tokens[i] = expand_home(info->tokens[i], -1, quotes, info);
 		printf("String parseada: %s\n", info->tokens[i]);
 		i++;
@@ -82,14 +84,16 @@ int expanding (t_info *info) {
 char	*expand_home(char *str, int i, int quotes[2], t_info *info){
 	char	*path;
 	char	*aux;
+	int q_simples;
+	int q_doubles;
 
-	quotes[0] = 0;
-	quotes[1] = 0;
+	q_simples = 0;
+	q_doubles= 0;
 	while (str && str[++i])
 	{
-		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
-		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
-		if (!quotes[0] && !quotes[1] && str[i] == '~' && (i == 0 || \
+		q_simples = (q_simples + (!q_doubles && str[i] == '\'')) % 2;
+		q_doubles = (q_doubles + (!q_simples && str[i] == '\"')) % 2;
+		if (!q_simples && !q_doubles && str[i] == '~' && (i == 0 || \
 			str[i - 1] != '$'))
 		{
 			aux = ft_substr(str, 0, i);

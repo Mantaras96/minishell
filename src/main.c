@@ -99,14 +99,12 @@ int main(int argc, char **argv, char **envp)
 		if (info->input)
 		{
 			add_history(info->input);
-
 			boo = parsing(info);
 			if(boo == 1){
-			boo = expanding(info);
-			// 	start_minishell(info);
+				boo = expanding(info);
+				// 	start_minishell(info);
 				free_tokens(info);
 			}
-
 		} else
 			exit (1);
 		free(info->input);
