@@ -14,7 +14,8 @@ SRC	=	main.c \
 		get_export.c \
 		get_exit.c \
 		get_cd.c \
-		expanding.c
+		expanding.c \
+		get_path.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

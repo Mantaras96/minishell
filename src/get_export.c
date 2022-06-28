@@ -38,9 +38,7 @@ int get_export(t_info *info){
                     free(info->envp[j]);
                     info->envp[j] = ft_strdup(info->tokens[i]);  
                 } else if (!pos){
-                    write(1, "AAAA", 4);
 				    info->envp = add_value_matrix(info->envp, info->tokens[i]);
-                    write(1, "zzz", 4);
                 }
 			i++;
             }

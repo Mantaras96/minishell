@@ -74,7 +74,6 @@ int expanding (t_info *info) {
 	while (info->tokens && info->tokens[i]){
 		info->tokens[i] = expand_vars(info->tokens[i], -1, info);
 		info->tokens[i] = expand_home(info->tokens[i], -1, quotes, info);
-		printf("String parseada: %s\n", info->tokens[i]);
 		i++;
 	}
 
