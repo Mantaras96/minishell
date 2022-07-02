@@ -50,6 +50,5 @@ void start_no_pipe(t_info *info)
 void start_minishell(t_info *info)
 {
 	//Por si tenemos que inicializar variables en info.
-	if(check_pipe_command(info) == 0)
 		start_no_pipe(info);
 }

@@ -25,8 +25,17 @@ typedef struct s_info
 	char	**envp;
 	char	*prompt;
 	int		pid;
+	t_list	*cmds;
 }			t_info;
 
+
+typedef struct s_commands
+{
+	char	**full_cmd;
+	char	**full_path;
+	int		ifile;
+	int		ofile;
+}		t_commands;
 
 int     get_pwd();
 int     ft_strcmp(const char *str1, const char *str2);

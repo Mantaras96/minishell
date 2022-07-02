@@ -112,6 +112,7 @@ int main(int argc, char **argv, char **envp)
 			boo = parsing(info);
 			if(boo == 1){
 				boo = expanding(info);
+				info->cmds = create_nodes(info);
 				start_minishell(info);
 				free_tokens(info);
 			}
