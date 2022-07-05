@@ -32,7 +32,7 @@ typedef struct s_info
 typedef struct s_commands
 {
 	char	**full_cmd;
-	char	**full_path;
+	char	*full_path;
 	int		ifile;
 	int		ofile;
 }		t_commands;
@@ -88,4 +88,7 @@ void	execute_other_commands(t_info *info);
 void	get_other(t_info *info);
 char 	*validate_command(char **paths, char *command);
 void 	get_path(t_info *info);
+
+t_list create_nodes(t_info *info);
+t_commands *command_init(void);
 
