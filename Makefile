@@ -17,7 +17,8 @@ SRC	=	main.c \
 		expanding.c \
 		get_path.c \
 		create_nodes.c \
-		get_redir.c
+		get_redir.c \
+		check_start.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
