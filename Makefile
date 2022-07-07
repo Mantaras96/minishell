@@ -16,7 +16,8 @@ SRC	=	main.c \
 		get_cd.c \
 		expanding.c \
 		get_path.c \
-		create_nodes.c
+		create_nodes.c \
+		get_redir.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
@@ -26,7 +27,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) -I ~/.brew/opt/readline/include -o $@ $^
+	@$(CC) -c -I ~/.brew/opt/readline/include -o $@ $^
 
 all:	$(NAME)
 

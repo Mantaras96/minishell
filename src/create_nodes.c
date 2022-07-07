@@ -18,7 +18,7 @@ void	free_content(void *content)
 	t_commands	*node;
 
 	node = content;
-	ft_free_matrix(&node->full_cmd);
+	free_matrix(&node->full_cmd);
 	free(node->full_path);
 	if (node->ifile != STDIN_FILENO)
 		close(node->ifile);
@@ -49,7 +49,7 @@ static t_commands *get_params(t_commands *node, char **temp1, char **temp2, int 
 		else if (temp1[*i][0] == '<')
 			node = get_infile1(node, temp2, i);
 		else if (temp1[*i][0] != '|')
-			node->full_cmd = ft_extend_matrix(node->full_cmd, temp2[*i]);
+			node->full_cmd = add_value_matrix(node->full_cmd, temp2[*i]);
 		else
 		{
 			//mini_perror(10, NULL, 2);
@@ -73,7 +73,7 @@ t_list *create_nodes(t_info *info)
 
     i = 0;
     cmd_1 = NULL;
-    temp2 == info->tokens;
+    temp2 = info->tokens;
 
     while (info->tokens[i])
     {

@@ -89,6 +89,10 @@ void	get_other(t_info *info);
 char 	*validate_command(char **paths, char *command);
 void 	get_path(t_info *info);
 
-t_list create_nodes(t_info *info);
+t_list *create_nodes(t_info *info);
 t_commands *command_init(void);
 
+t_commands *get_outfile2(t_commands *node, char **temp2, int *i);
+t_commands *get_outfile1(t_commands *node, char **temp2, int *i);
+t_commands *get_infile2(t_commands *node, char **temp2, int *i);
+t_commands *get_infile1(t_commands *node, char **temp2, int *i);
