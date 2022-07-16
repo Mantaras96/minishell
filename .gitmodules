@@ -1,6 +1,6 @@
-[submodule "ft_printf"]
-	path = ft_printf
-	url = https://github.com/Mantaras96/ft_printf.git
 [submodule "42_get_next_line"]
 	path = 42_get_next_line
 	url = https://github.com/Mantaras96/42_get_next_line.git
+[submodule "ft_printf"]
+	path = ft_printf
+	url = https://github.com/Mantaras96/ft_printf.git
