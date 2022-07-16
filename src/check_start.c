@@ -46,17 +46,19 @@ char *find_cmd(char **path, char *cmd, char *full_path)
         if (access(full_path, F_OK) == 0)
             break ;
     }
-    if (!path || path[i])
+    if (!path || !path[i])
     {
+        write(1, "hola", 4);
         free(full_path);
         return (NULL);
-    }
+    } 
     return (full_path);
 }
 
 DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
     t_commands *c;
     DIR *dir;
+    char **prueba;
 
     c = cmds->content;
     dir = NULL;
@@ -64,6 +66,7 @@ DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
         dir = opendir(*c->full_cmd);
     if (c && c->full_cmd && ft_strchr(*c->full_cmd, '/') && !dir)
     {
+        write(1, "Hola\n", 5);
         *s = ft_split(*c->full_cmd, '/');
         c->full_path = ft_strdup(*c->full_cmd);
         free(c->full_cmd[0]);
@@ -71,10 +74,12 @@ DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
     }
     else if (!is_builtin(c) && c && c->full_cmd && !dir)
     {
+       
         path = get_env_value("PATH", info->envp, 4);
-        *s = ft_split(path, ':');
+        //printf("path  %s \n", path);
+        prueba = ft_split(path, ':');
         free(path);
-        c->full_path = find_cmd(*s, *c->full_cmd, c->full_path);
+        c->full_path = find_cmd(prueba, *c->full_cmd, c->full_path);
     }
     free_matrix(s);
     return (dir);
@@ -85,6 +90,7 @@ void get_command(t_info *info, t_list *cmds){
     DIR *dir;
 
     c = cmds->content;
+    
     dir = get_dir(info, cmds, NULL, NULL);
     if (!is_builtin(c) && c && c->full_cmd && dir)
         //es un directorio
@@ -101,7 +107,7 @@ void get_command(t_info *info, t_list *cmds){
         closedir(dir);
 }
 
-void exec_command(t_info *info, t_list *cmds)
+void *exec_command(t_info *info, t_list *cmds)
 {
     int p_fd[2];
 
@@ -119,13 +125,14 @@ void exec_command(t_info *info, t_list *cmds)
         close (((t_commands *)cmds->content)->ifile);
     if (((t_commands *)cmds->content)->ofile > 2)
         close (((t_commands *)cmds->content)->ofile);
-    //return (NULL);
+    return (NULL);
 }
 
-int builtin(t_info *info, t_list *cmds, int n) {
+int builtin(t_info *info, t_list *cmds) {
     char **c_full;
-
+    
     while (cmds){
+       
         c_full = ((t_commands *)cmds->content)->full_cmd;
         if (c_full && !ft_strcmp (info->tokens[0], "exit"))
             get_exit(info); //Si no funciona probamos con cmd
@@ -142,7 +149,13 @@ int builtin(t_info *info, t_list *cmds, int n) {
     return (g_status);
 }
 
-void check_status(t_info *info, t_list *cmds, int n)
+void check_status(t_info *info, t_list *cmds)
 {
-    g_status = builtin(info, cmds, n);
+    int i;
+
+    i = 0;
+    i = ft_lstsize(info->cmds);
+    g_status = builtin(info, cmds);
+    while (i-- > 0)
+		waitpid(-1, &g_status, 0);
 }

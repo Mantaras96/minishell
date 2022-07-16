@@ -92,6 +92,6 @@ t_list *create_nodes(t_info *info)
 			break ;
         i++;
     }
-    free_matrix(&temp2);
+    //free_matrix(&temp2);
 	return(cmd_1);
 }

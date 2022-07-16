@@ -50,7 +50,7 @@ char *get_env_value(char *var, char **envp, int n){
     return (NULL);
 }
 
-void get_env(t_info *info){
+int get_env(t_info *info){
     int i;
 
     i = 0;
@@ -58,4 +58,5 @@ void get_env(t_info *info){
         printf("%s\n", info->envp[i]);
         i++;
     }
+    return (0);
 }

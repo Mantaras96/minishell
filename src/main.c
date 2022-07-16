@@ -93,7 +93,9 @@ int main(int argc, char **argv, char **envp)
 {
 	t_info *info;
 	int boo;
+	int n;
 
+	n = 0;
 	boo = 0;
 	(void)argc;
 	info = (t_info *)malloc(sizeof(t_info));
@@ -113,8 +115,8 @@ int main(int argc, char **argv, char **envp)
 			if(boo == 1){
 				boo = expanding(info);
 				info->cmds = create_nodes(info);
-				start_minishell(info);
-				free_tokens(info);
+				check_status(info, info->cmds);
+				//free_tokens(info);
 			}
 		} else
 			exit (1);

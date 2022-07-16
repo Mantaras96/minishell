@@ -63,7 +63,7 @@ char	**ft_strdup_matrix(char **matrix);
 char	**matrix_delete_element(char **matrix, int j);
 //Get env (get_env.c)
 char	**set_env(char *var, char *value, char **envp, int n);
-void	get_env(t_info *info);
+int	get_env(t_info *info);
 
 int		search_value_string(char *argv, int value);
 char	*get_env_value(char *var, char **envp, int n);
@@ -98,3 +98,8 @@ t_commands *get_outfile2(t_commands *node, char **temp2, int *i);
 t_commands *get_outfile1(t_commands *node, char **temp2, int *i);
 t_commands *get_infile2(t_commands *node, char **temp2, int *i);
 t_commands *get_infile1(t_commands *node, char **temp2, int *i);
+
+void *validate_fork(t_info *info, t_list *cmds, int p_fd[2]);
+
+int builtin(t_info *info, t_list *cmds);
+void check_status(t_info *info, t_list *cmds);

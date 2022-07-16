@@ -17,8 +17,10 @@ int ft_strcmp(const char *str1, const char *str2)
 
 int get_pwd()
 {
-	char pwd[PATH_MAX];
-	if (getcwd(pwd, sizeof(pwd)) != NULL)
-		printf("%s\n", pwd);
+	char	*buf;
+
+	buf = getcwd(NULL, 0);
+	ft_putendl_fd(buf, 1);
+	free(buf);
 	return (0);
 }

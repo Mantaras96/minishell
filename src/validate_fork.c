@@ -18,17 +18,19 @@ void *redir_process(t_list *cmd, int fd[2]){
     return ("");
 }
 
-void    builtin_process(t_info *info, t_commands *c, t_list *cmd){
+void    builtin_process(t_info *info, t_list *cmds, t_commands *c){
     signal(SIGINT, SIG_DFL);
     signal(SIGQUIT, SIG_DFL);
     if (!is_builtin(c) && c->full_cmd)
         execve(c->full_path, c->full_cmd, info->envp);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "pwd"))
-        g_status = get_pwd();
+        get_pwd();
      else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "echo"))
-        g_status = get_echo(cmd);
+        get_echo(info);
+        //write(1, "hola", 4);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "env"))
-        g_status = get_env(cmd);
+        get_env(info);
+        //write(1, "hola", 4);
         
 }
 
@@ -79,4 +81,5 @@ void *validate_fork(t_info *info, t_list *cmds, int p_fd[2])
         g_status = 127;
     if (dir)
         closedir(dir);
+    return ("");
 }
