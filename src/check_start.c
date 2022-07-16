@@ -108,8 +108,8 @@ void exec_command(t_info *info, t_list *cmds)
     get_command(info, cmds);
     if(pipe(p_fd) == -1)
         write(1, "pError" , 6);
-    //if (!validate_fork(info, cmds, p_fd))
-    //    return(NULL);
+    if (!validate_fork(info, cmds, p_fd))
+       return(NULL);
     close(p_fd[1]);
     if (cmds->next && !((t_commands *)cmds->next->content)->ifile)
         ((t_commands *)cmds->next->content)->ifile = p_fd[0];

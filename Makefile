@@ -18,7 +18,8 @@ SRC	=	main.c \
 		get_path.c \
 		create_nodes.c \
 		get_redir.c \
-		check_start.c
+		check_start.c \
+		validate_fork.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

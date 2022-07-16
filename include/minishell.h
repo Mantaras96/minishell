@@ -89,6 +89,8 @@ void	get_other(t_info *info);
 char 	*validate_command(char **paths, char *command);
 void 	get_path(t_info *info);
 
+int is_builtin(t_commands *n);
+
 t_list *create_nodes(t_info *info);
 t_commands *command_init(void);
 
