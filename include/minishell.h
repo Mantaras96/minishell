@@ -103,3 +103,7 @@ void *validate_fork(t_info *info, t_list *cmds, int p_fd[2]);
 
 int builtin(t_info *info, t_list *cmds);
 void check_status(t_info *info, t_list *cmds);
+
+char	**ft_cmdsubsplit(char const *s, char *set);
+
+char	**ft_matrix_replace_in(char ***big, char **small, int n);

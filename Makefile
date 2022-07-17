@@ -19,7 +19,8 @@ SRC	=	main.c \
 		create_nodes.c \
 		get_redir.c \
 		check_start.c \
-		validate_fork.c
+		validate_fork.c \
+		tokens_subsplit.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

@@ -54,7 +54,7 @@ int get_env(t_info *info){
     int i;
 
     i = 0;
-    while(i < ft_matrix_len(info->envp) - 1){
+    while(info->envp[i]){
         printf("%s\n", info->envp[i]);
         i++;
     }

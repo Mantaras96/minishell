@@ -67,15 +67,30 @@ char	*expand_vars(char *str, int i, t_info *info)
 }
 
 int expanding (t_info *info) {
+	char **aux;
 	int i;
 	int		quotes[2];
 
 	i = 0;
 	while (info->tokens && info->tokens[i]){
 		info->tokens[i] = expand_vars(info->tokens[i], -1, info);
+		
 		info->tokens[i] = expand_home(info->tokens[i], -1, quotes, info);
+		aux = ft_cmdsubsplit(info->tokens[i], "><|");
+		ft_matrix_replace_in(&info->tokens, aux, i);
+		i += ft_matrix_len(aux) - 1;
+		free_matrix(&aux);
+		printf("Token1:%s\n",  info->tokens[i]);
 		i++;
 	}
+
+
+	i = 0;
+	while (info->tokens && info->tokens[i]){
+		printf("Token1:%s\n",  info->tokens[i]);
+		i++;
+	}
+	
 
 	return (0);
 }
