@@ -80,18 +80,8 @@ int expanding (t_info *info) {
 		ft_matrix_replace_in(&info->tokens, aux, i);
 		i += ft_matrix_len(aux) - 1;
 		free_matrix(&aux);
-		printf("Token1:%s\n",  info->tokens[i]);
 		i++;
 	}
-
-
-	i = 0;
-	while (info->tokens && info->tokens[i]){
-		printf("Token1:%s\n",  info->tokens[i]);
-		i++;
-	}
-	
-
 	return (0);
 }
 

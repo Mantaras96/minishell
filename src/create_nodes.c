@@ -73,7 +73,10 @@ t_list *create_nodes(t_info *info)
 
     i = 0;
     cmd_1 = NULL;
-    temp2 = info->tokens;
+	
+    temp2 = remove_quotes(info->tokens);
+	info->tokens = remove_quotes(info->tokens);
+
 
     while (info->tokens[i])
     {
@@ -92,6 +95,6 @@ t_list *create_nodes(t_info *info)
 			break ;
         i++;
     }
-    //free_matrix(&temp2);
+    free_matrix(&temp2);
 	return(cmd_1);
 }

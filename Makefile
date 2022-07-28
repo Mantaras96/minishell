@@ -20,7 +20,8 @@ SRC	=	main.c \
 		get_redir.c \
 		check_start.c \
 		validate_fork.c \
-		tokens_subsplit.c
+		tokens_subsplit.c \
+		remove_quotes.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

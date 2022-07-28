@@ -107,3 +107,5 @@ void check_status(t_info *info, t_list *cmds);
 char	**ft_cmdsubsplit(char const *s, char *set);
 
 char	**ft_matrix_replace_in(char ***big, char **small, int n);
+
+char	**remove_quotes(char **tokens);
