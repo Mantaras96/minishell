@@ -68,7 +68,7 @@ int	get_env(t_info *info);
 int		search_value_string(char *argv, int value);
 char	*get_env_value(char *var, char **envp, int n);
 int		count_var_envp(char *token, char **envp, int *j);
-void	get_exit(t_info *info);
+int	get_exit(t_info *info);
 void	free_tokens(t_info *info);
 int count_var_envp(char *token, char **envp, int *j);
 

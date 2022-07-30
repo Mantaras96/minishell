@@ -17,10 +17,10 @@ int ft_strcmp(const char *str1, const char *str2)
 
 int get_pwd()
 {
-	char	*buf;
+	char	*pwd;
 
-	buf = getcwd(NULL, 0);
-	ft_putendl_fd(buf, 1);
-	free(buf);
+	pwd = getcwd(NULL, 0);
+	ft_putendl_fd(pwd, 1);
+	free(pwd);
 	return (0);
 }

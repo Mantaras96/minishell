@@ -135,7 +135,7 @@ int builtin(t_info *info, t_list *cmds) {
        
         c_full = ((t_commands *)cmds->content)->full_cmd;
         if (c_full && !ft_strcmp (info->tokens[0], "exit"))
-            get_exit(info); //Si no funciona probamos con cmd
+            g_status = get_exit(info); //Si no funciona probamos con cmd
         else if (!cmds->next && c_full && !ft_strcmp (info->tokens[0], "export"))
             g_status = get_export(info);
         else if (!cmds->next && c_full && !ft_strcmp (info->tokens[0], "cd"))
