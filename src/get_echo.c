@@ -6,9 +6,9 @@ int get_echo(t_commands *info)
     int flag;
 
     i = 1;
-    flag = 0;
-    if (ft_strncmp(info->full_cmd[1], "-n", 2)){
-        flag = 1;
+    flag = 1;
+    if (!ft_strncmp(info->full_cmd[1], "-n", 2)){
+        flag = 0;
         i = 2;
     };
 

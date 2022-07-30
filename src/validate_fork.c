@@ -28,9 +28,7 @@ void    builtin_process(t_info *info, t_list *cmds, t_commands *c){
      else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "echo"))
         g_status = get_echo(c);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "env"))
-        get_env(info);
-        //write(1, "hola", 4);
-        
+        get_env(info);     
 }
 
 
