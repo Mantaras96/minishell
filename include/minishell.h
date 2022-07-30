@@ -40,7 +40,7 @@ typedef struct s_commands
 int     get_pwd();
 int     ft_strcmp(const char *str1, const char *str2);
 void    print_star_minishell();
-void    get_echo(t_info *info);
+void    get_echo(t_commands *info);
 int	parsing(t_info *info);
 void	counter(t_info *info);
 int		simples(int i, t_info *info);

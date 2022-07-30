@@ -1,26 +1,19 @@
 #include "../include/minishell.h"
 
-void get_echo(t_info *info)
+void get_echo(t_commands *info)
 {
     int i;
     int flag;
+    t_commands *commands;
+    char **full_cmd;
 
-    flag = 0;
-    if (!info->pipe_command && !info->redirect)
-    {
-        i = 1;
-        if (!ft_strcmp(info->tokens[1], "-n"))
-        {
-            flag = 1;
-            i++;
-        }
-        while (info->tokens[i])
-        {
-            printf("%s", info->tokens[i]);
-            i++;
-        }
-        if (!flag)
-           printf("\n");
+    full_cmd = info->full_cmd;
+
+    i = 0;
+    while (full_cmd && full_cmd[i]){
+        printf("Linea: %s", full_cmd[i]);
+        i++;
     }
+
 
 }
