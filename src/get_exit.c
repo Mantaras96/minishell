@@ -1,5 +1,6 @@
 #include "../include/minishell.h"
 
+extern int	g_status;
 
 void free_tokens(t_info *info)
 {
@@ -14,13 +15,24 @@ void free_tokens(t_info *info)
 	free(info->tokens);
 }
 
-void get_exit(t_info *info)
+int get_exit(t_info *info)
 {
-	free_tokens(info);
-	free(info->input);
-	free(info->prompt);
-	free_matrix(&info->envp);
-	free(info->envp);
-	free(info);
-	exit(0);
+	int ret;
+	if (ft_matrix_len(info->tokens) == 2)
+	{
+		printf("exit");
+		ret = ft_atoi(info->tokens[1]);
+	}
+	else if (ft_matrix_len(info->tokens) > 2)
+	{
+		printf("exit");
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ret = 1;
+	}
+	else{
+		printf("exit");
+		ret = 0;
+	}
+	ret %= 256 + 256 * (ret < 0);
+	return (ret);
 }
