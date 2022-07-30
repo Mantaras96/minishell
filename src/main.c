@@ -104,24 +104,22 @@ int main(int argc, char **argv, char **envp)
 	print_star_minishell();
 	if (signal_handler() == 0)
 		return (0);
-	while (42)
+	while (argv && argc)
 	{	
 		init_prompt(info);
 		info->input = readline(info->prompt);
 		if (info->input)
 		{
-			add_history(info->input);
 			boo = parsing(info);
 			if(boo == 1){
 				boo = expanding(info);
-				
-				info->cmds = create_nodes(info);
-				check_status(info, info->cmds);
-				//free_tokens(info);
+				if(!start_args(info->input, info))
+					break ;
+				//check_status(info, info->cmds);
 			}
 		} else
 			exit (1);
 		free(info->input);
-		exit(g_status);
 	}
+	exit(g_status);
 }

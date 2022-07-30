@@ -61,7 +61,7 @@ char **ft_split_all(char *str, t_info *info){
 		comillas = 0;
     }
     buff[j] = 0;
-    printf("PALABRAS: %d\n", j);
+    //printf("PALABRAS: %d\n", j);
     return (buff);
 }
 
