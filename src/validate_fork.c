@@ -24,11 +24,11 @@ void    builtin_process(t_info *info, t_list *cmds, t_commands *c){
     if (!is_builtin(c) && c->full_cmd)
         execve(c->full_path, c->full_cmd, info->envp);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "pwd"))
-        get_pwd();
+        g_status = get_pwd();
      else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "echo"))
         g_status = get_echo(c);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "env"))
-        get_env(info);     
+        g_status = get_env(info);     
 }
 
 

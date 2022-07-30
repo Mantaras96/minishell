@@ -122,6 +122,6 @@ int main(int argc, char **argv, char **envp)
 		} else
 			exit (1);
 		free(info->input);
-		exit(g_status);
+		// exit(g_status);
 	}
 }

@@ -74,7 +74,7 @@ int count_var_envp(char *token, char **envp, int *j);
 
 //Get (export.c)
 int count_var_envp(char *token, char **envp, int *j);
-int get_unset(t_info *info);
+int	get_unset(t_info *info, char **full_cmd);
 int get_export(t_info *info);
 int search_value_string(char *argv, int value);
 

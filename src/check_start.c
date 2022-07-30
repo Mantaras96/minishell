@@ -141,7 +141,7 @@ int builtin(t_info *info, t_list *cmds) {
         else if (!cmds->next && c_full && !ft_strcmp (info->tokens[0], "cd"))
             g_status = get_cd(info);
         else if (!cmds->next && c_full && !ft_strcmp (info->tokens[0], "unset"))
-            g_status = get_unset(info);
+            g_status = get_unset(info, c_full);
         else
             exec_command(info, cmds);
         cmds = cmds->next;
