@@ -68,7 +68,7 @@ int	get_env(t_info *info);
 int		search_value_string(char *argv, int value);
 char	*get_env_value(char *var, char **envp, int n);
 int		count_var_envp(char *token, char **envp, int *j);
-int	get_exit(t_info *info);
+int	get_exit(t_info *info, int *num_exit);
 void	free_tokens(t_info *info);
 int count_var_envp(char *token, char **envp, int *j);
 
@@ -101,11 +101,13 @@ t_commands *get_infile1(t_commands *node, char **temp2, int *i);
 
 void *validate_fork(t_info *info, t_list *cmds, int p_fd[2]);
 
-int builtin(t_info *info, t_list *cmds);
-void check_status(t_info *info, t_list *cmds);
+int builtin(t_info *info, t_list *cmds, int *num_exit);
+void *check_status(t_info *info, t_list *cmds);
 
 char	**ft_cmdsubsplit(char const *s, char *set);
 
 char	**ft_matrix_replace_in(char ***big, char **small, int n);
 
 char	**remove_quotes(char **tokens);
+
+void    *start_args(char *str, t_info *info);
