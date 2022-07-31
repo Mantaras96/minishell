@@ -12,6 +12,13 @@ void *redir_process(t_list *cmd, int fd[2]){
             write (1, "Mini perror", 11);
         close (c->ofile);
     }
+    if (c->ofile != STDOUT_FILENO)
+    {
+        if (dup2(c->ofile, STDOUT_FILENO) == -1)
+            write(1, "MINI perror", 11);
+        close(c->ofile);
+    }
+
     else if (cmd->next && dup2(fd[1], STDOUT_FILENO) == -1)
         write (1, "Mini perror", 11);
     close(fd[1]);
@@ -28,7 +35,10 @@ void    builtin_process(t_info *info, t_list *cmds, t_commands *c){
      else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "echo"))
         g_status = get_echo(c);
     else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "env"))
-        g_status = get_env(info);     
+    {
+        g_status = get_env(info);
+        g_status = 0;
+    }   
 }
 
 
