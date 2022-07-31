@@ -22,7 +22,8 @@ SRC	=	main.c \
 		validate_fork.c \
 		tokens_subsplit.c \
 		remove_quotes.c \
-		heredoc_infile.c
+		heredoc_infile.c \
+		error.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
