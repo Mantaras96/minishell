@@ -48,7 +48,6 @@ char *find_cmd(char **path, char *cmd, char *full_path)
     }
     if (!path || !path[i])
     {
-        write(1, "hola", 4);
         free(full_path);
         return (NULL);
     } 
@@ -66,7 +65,6 @@ DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
         dir = opendir(*c->full_cmd);
     if (c && c->full_cmd && ft_strchr(*c->full_cmd, '/') && !dir)
     {
-        write(1, "Hola\n", 5);
         *s = ft_split(*c->full_cmd, '/');
         c->full_path = ft_strdup(*c->full_cmd);
         free(c->full_cmd[0]);
@@ -80,6 +78,8 @@ DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
         prueba = ft_split(path, ':');
         free(path);
         c->full_path = find_cmd(prueba, *c->full_cmd, c->full_path);
+        if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0])
+            printf("Command Not found\n");
     }
     free_matrix(s);
     return (dir);
@@ -152,7 +152,7 @@ int builtin(t_info *info, t_list *cmds,  int *num_exit) {
     return (g_status);
 }
 
-static void free_cnt(void *content)
+void free_cnt(void *content)
 {
     t_commands *node;
 

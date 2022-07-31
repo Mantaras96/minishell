@@ -99,6 +99,8 @@ t_commands *get_outfile1(t_commands *node, char **temp2, int *i);
 t_commands *get_infile2(t_commands *node, char **temp2, int *i);
 t_commands *get_infile1(t_commands *node, char **temp2, int *i);
 
+int	get_fd(int oldfd, char *path, int i, int j);
+
 void *validate_fork(t_info *info, t_list *cmds, int p_fd[2]);
 
 int builtin(t_info *info, t_list *cmds, int *num_exit);
@@ -111,3 +113,11 @@ char	**ft_matrix_replace_in(char ***big, char **small, int n);
 char	**remove_quotes(char **tokens);
 
 void    *start_args(char *str, t_info *info);
+
+
+void free_cnt(void *content);
+
+
+int heredoc(char *str[2], char *aux[2]);
+
+char *here_str(char *str[2], size_t len, char *aux_1, char * aux_2);

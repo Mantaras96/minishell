@@ -3,7 +3,7 @@
 
 extern int	g_status;
 
-int	get_fd(int oldfd, char *path, int i, int j])
+int	get_fd(int oldfd, char *path, int i, int j)
 {
     int fd;
 
@@ -86,7 +86,7 @@ t_commands *get_infile2(t_commands *node, char **temp2, int *i){
 	if (temp2[++(*i)])
 	{
 		aux[0] = temp2[*i];
-		node->ifile = here_doc(str, aux);
+		node->ifile = heredoc(str, aux);
 	}
     if (!temp2[*i] || node->ifile == -1)
     {

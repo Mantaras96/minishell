@@ -18,7 +18,6 @@ void *redir_process(t_list *cmd, int fd[2]){
             write(1, "MINI perror", 11);
         close(c->ofile);
     }
-
     else if (cmd->next && dup2(fd[1], STDOUT_FILENO) == -1)
         write (1, "Mini perror", 11);
     close(fd[1]);
@@ -50,7 +49,7 @@ void *child_process(t_info *info, t_list *cmds, int p_fd[2])
     redir_process(cmds, p_fd);
     close(p_fd[0]);
     builtin_process(info, cmds, c);
-    //ft_lstclear(&info->cmds, free_content);
+    ft_lstclear(&info->cmds, free_cnt);
     exit(g_status);
 }
 
