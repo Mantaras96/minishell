@@ -50,7 +50,7 @@ void	*child_process(t_info *info, t_list *cmds, int p_fd[2])
 	redir_process(cmds, p_fd);
 	close(p_fd[0]);
 	builtin_process(info, cmds, c);
-	ft_lstclear(&info->cmds, free_cnt);
+	///ft_lstclear(&info->cmds, free_cnt);
 	exit(g_status);
 }
 
@@ -75,6 +75,7 @@ void	*validate_fork(t_info *info, t_list *cmds, int p_fd[2])
 	t_commands	*c;
 
 	c = cmds->content;
+	//printf("%d %d", c->ifile, c->ofile);
 	dir = NULL;
 	if (c->full_cmd)
 		dir = opendir(*c->full_cmd);

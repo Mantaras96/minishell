@@ -57,7 +57,6 @@ char *find_cmd(char **path, char *cmd, char *full_path)
 DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
     t_commands *c;
     DIR *dir;
-    char **prueba;
 
     c = cmds->content;
     dir = NULL;
@@ -74,24 +73,22 @@ DIR *get_dir(t_info *info, t_list *cmds, char ***s, char *path){
     {
        
         path = get_env_value("PATH", info->envp, 4);
-        //printf("path  %s \n", path);
-        prueba = ft_split(path, ':');
+        *s = ft_split(path, ':');
         free(path);
-        c->full_path = find_cmd(prueba, *c->full_cmd, c->full_path);
+        c->full_path = find_cmd(*s, *c->full_cmd, c->full_path);
         if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0])
             printf("Command Not found\n");
     }
-    free_matrix(s);
     return (dir);
 }
 
-void get_command(t_info *info, t_list *cmds){
+void get_command(t_info *info, t_list *cmds, char **s, char *path){
     t_commands *c;
     DIR *dir;
 
     c = cmds->content;
     
-    dir = get_dir(info, cmds, NULL, NULL);
+    dir = get_dir(info, cmds, &s, path);
     if (!is_builtin(c) && c && c->full_cmd && dir)
         //es un directorio
         write(1, "error\n", 6);
@@ -105,13 +102,14 @@ void get_command(t_info *info, t_list *cmds){
         write(1, "error\n", 6);
     if (dir)
         closedir(dir);
+    free_matrix(&s);
 }
 
 void *exec_command(t_info *info, t_list *cmds)
 {
     int p_fd[2];
 
-    get_command(info, cmds);
+    get_command(info, cmds, NULL, NULL);
     if(pipe(p_fd) == -1)
         write(1, "pError" , 6);
     if (!validate_fork(info, cmds, p_fd))

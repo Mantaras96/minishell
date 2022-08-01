@@ -99,7 +99,7 @@ t_commands *get_outfile1(t_commands *node, char **temp2, int *i);
 t_commands *get_infile2(t_commands *node, char **temp2, int *i);
 t_commands *get_infile1(t_commands *node, char **temp2, int *i);
 
-int	get_fd(int oldfd, char *path, int i, int j);
+int	get_fd(int oldfd, char *path, int flags[2]);
 
 void *validate_fork(t_info *info, t_list *cmds, int p_fd[2]);
 

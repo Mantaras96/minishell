@@ -52,7 +52,6 @@ static t_commands *get_params(t_commands *node, char **temp1, char **temp2, int 
 			node->full_cmd = add_value_matrix(node->full_cmd, temp2[*i]);
 		else
 		{
-			//mini_perror(10, NULL, 2);
 			*i = -2;
 		}
 		return (node);
@@ -96,5 +95,6 @@ t_list *create_nodes(t_info *info)
         i++;
     }
     free_matrix(&temp2);
+	//ree_matrix(&info->tokens);
 	return(cmd_1);
 }

@@ -2,7 +2,7 @@
 
 extern int	g_status;
 
-char *here_str(char *str[2], size_t len, char *aux_1, char * aux_2)
+char *here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 {
     char *temp;
     while (g_status != 130 && (!str[0] || ft_strcmp(str[0], aux_1) \
