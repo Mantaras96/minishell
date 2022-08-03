@@ -123,3 +123,5 @@ int heredoc(char *str[2], char *aux[2]);
 char *here_str(char *str[2], size_t len, char *aux_1, char * aux_2);
 
 void	*error(int err);
+
+void    checkInfoCdms(t_list *cmd);
