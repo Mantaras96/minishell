@@ -76,7 +76,6 @@ t_list *create_nodes(t_info *info)
     temp2 = remove_quotes(info->tokens);
 	info->tokens = remove_quotes(info->tokens);
 
-
     while (info->tokens[i])
     {
         cmd_2 = ft_lstlast(cmd_1);

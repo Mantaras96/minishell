@@ -174,11 +174,12 @@ void *check_status(t_info *info, t_list *cmds)
     i = 0;
     num_exit = 0;
     info->cmds = create_nodes(info);
+
     if (!info->cmds)
         return (info);
     i = ft_lstsize(info->cmds);
 
-
+    checkInfoCdms(info->cmds);
     g_status = builtin(info, info->cmds, &num_exit);
     while (i-- > 0)
 		waitpid(-1, &g_status, 0);
