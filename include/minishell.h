@@ -51,6 +51,7 @@ int		create_simples (int i, t_info *info);
 int		create_word(t_info *info, int i, char charact);
 int		word_length(t_info *info, int i, char charact);
 void init_prompt(t_info *info);
+void handler(int signum);
 
 //Utils matrix (utils_matrix.c)
 void	free_matrix(char ***matrix);
