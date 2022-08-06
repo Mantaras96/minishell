@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_fork.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 15:09:40 by amantara          #+#    #+#             */
+/*   Updated: 2022/08/06 15:09:44 by amantara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 extern int	g_status;
@@ -51,7 +63,6 @@ void	*child_process(t_info *info, t_list *cmds, int p_fd[2])
     //write(1, "foca2\n", 6);
 	close(p_fd[0]);
 	builtin_process(info, cmds, c);
-	///ft_lstclear(&info->cmds, free_cnt);
 	exit(g_status);
 }
 
@@ -65,7 +76,6 @@ void	exc_fork(t_info *info, t_list *cmds, int p_fd[2])
 	{
 		close(p_fd[0]);
 		close(p_fd[1]);
-		//error de forks
 	}
 	else if (!pid)
     {
@@ -81,7 +91,6 @@ void	*validate_fork(t_info *info, t_list *cmds, int p_fd[2])
 	t_commands	*c;
 
 	c = cmds->content;
-	//printf("%d %d", c->ifile, c->ofile);
 	dir = NULL;
 	if (c->full_cmd)
 		dir = opendir(*c->full_cmd);

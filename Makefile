@@ -10,6 +10,7 @@ SRC	=	main.c \
 		tokens.c \
 		start_minishell.c \
 		utils_matrix.c \
+		utils_matrix2.c \
 		get_env.c \
 		get_export.c \
 		get_exit.c \
