@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanding.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 16:06:12 by tmerida-          #+#    #+#             */
+/*   Updated: 2022/08/06 16:10:21 by tmerida-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 extern int	g_status;
@@ -45,15 +57,13 @@ static char	*get_substr_var(char *str, int i, t_info *prompt)
 	return (aux);
 }
 
-
-
 char	*expand_vars(char *str, int i, t_info *info)
 {
-	int q_simples;
-	int q_doubles;
+	int	q_simples;
+	int	q_doubles;
 
 	q_simples = 0;
-	q_doubles= 0;
+	q_doubles = 0;
 	while (str && str[++i])
 	{
 		q_simples = (q_simples + (!q_doubles && str[i] == '\'')) % 2;
@@ -66,15 +76,16 @@ char	*expand_vars(char *str, int i, t_info *info)
 	return (str);
 }
 
-int expanding (t_info *info) {
-	char **aux;
-	int i;
+int	expanding(t_info *info)
+{
+	char	**aux;
+	int		i;
 	int		quotes[2];
 
 	i = 0;
-	while (info->tokens && info->tokens[i]){
+	while (info->tokens && info->tokens[i])
+	{
 		info->tokens[i] = expand_vars(info->tokens[i], -1, info);
-		
 		info->tokens[i] = expand_home(info->tokens[i], -1, quotes, info);
 		aux = ft_cmdsubsplit(info->tokens[i], "><|");
 		ft_matrix_replace_in(&info->tokens, aux, i);
@@ -85,14 +96,15 @@ int expanding (t_info *info) {
 	return (0);
 }
 
-char	*expand_home(char *str, int i, int quotes[2], t_info *info){
+char	*expand_home(char *str, int i, int quotes[2], t_info *info)
+{
 	char	*path;
 	char	*aux;
-	int q_simples;
-	int q_doubles;
+	int		q_simples;
+	int		q_doubles;
 
 	q_simples = 0;
-	q_doubles= 0;
+	q_doubles = 0;
 	while (str && str[++i])
 	{
 		q_simples = (q_simples + (!q_doubles && str[i] == '\'')) % 2;
@@ -108,9 +120,9 @@ char	*expand_home(char *str, int i, int quotes[2], t_info *info){
 			str = ft_strjoin(path, aux);
 			free(aux);
 			free(path);
-			return (expand_home(str, i + ft_strlen(get_env_value("HOME", info->envp, 4)) - 1, quotes, info));
+			return (expand_home(str, i + ft_strlen(get_env_value("HOME",
+							info->envp, 4)) - 1, quotes, info));
 		}
 	}
 	return (str);
-
 }

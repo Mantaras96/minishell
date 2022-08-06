@@ -129,7 +129,6 @@ int main(int argc, char **argv, char **envp)
 				boo = expanding(info);
 				if(!start_args(info->input, info))
 					break ;
-				//check_status(info, info->cmds);
 			}
 		} else
 			exit (1);

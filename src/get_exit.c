@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_exit.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 16:25:33 by tmerida-          #+#    #+#             */
+/*   Updated: 2022/08/06 16:27:33 by tmerida-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 extern int	g_status;
 
-void free_tokens(t_info *info)
+void	free_tokens(t_info *info)
 {
-	int i; 
+	int	i;
 
 	i = 0;
 	while (info->tokens[i])
@@ -15,11 +27,11 @@ void free_tokens(t_info *info)
 	free(info->tokens);
 }
 
-int get_exit(t_info *info, int *num_exit)
+int	get_exit(t_info *info, int *num_exit)
 {
-	int ret;
+	int			ret;
+	t_commands	*node;
 
-	t_commands *node;
 	node = info->cmds->content;
 	*num_exit = !info->cmds->next;
 	if (*num_exit)
