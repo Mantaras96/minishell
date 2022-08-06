@@ -23,7 +23,7 @@ void	*redir_process(t_list *cmd, int fd[2])
 	{
 		if (dup2(c->ifile, STDIN_FILENO) == -1)
 			return (error(1));
-		close (c->ofile);
+		close (c->ifile);
 	}
 	if (c->ofile != STDOUT_FILENO)
 	{
@@ -60,6 +60,7 @@ void	*child_process(t_info *info, t_list *cmds, int p_fd[2])
 
 	c = cmds->content;
 	redir_process(cmds, p_fd);
+    //write(1, "foca2\n", 6);
 	close(p_fd[0]);
 	builtin_process(info, cmds, c);
 	exit(g_status);
@@ -70,14 +71,19 @@ void	exc_fork(t_info *info, t_list *cmds, int p_fd[2])
 	pid_t	pid;
 
 	pid = fork();
+    //checkInfoCdms(cmds);
 	if (pid < 0)
 	{
 		close(p_fd[0]);
 		close(p_fd[1]);
 	}
 	else if (!pid)
+    {
+        //write(1, "foca\n", 5);
 		child_process(info, cmds, p_fd);
+    }
 }
+
 
 void	*validate_fork(t_info *info, t_list *cmds, int p_fd[2])
 {

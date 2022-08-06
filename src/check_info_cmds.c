@@ -21,7 +21,7 @@ void    checkInfoCdms(t_list *cmd)
         printf ("Full_cmd[%d]: %s\n", i, c->full_cmd[i]);
         i++;
     }
-    printf("Full path: %s\n", c->full_path );
+    printf("Full path: %s", c->full_path );
 
     printf ("IntFile: %d Outfile: %d\n", c->ifile, c->ofile);
     cmd = cmd->next;

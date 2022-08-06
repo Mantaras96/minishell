@@ -55,8 +55,22 @@ void init_info(t_info *info, char **envp)
 void init_prompt(t_info *info)
 {
 	char *aux;
+	pid_t pid;
+	int fd[2];
 	aux = ft_strjoin("\033[1;33m", getcwd(NULL, 0));
 	info->prompt = ft_strjoin(aux, "--ENCUERAO🦄🦹--->$ \033[1;00m");
+	pipe(fd);
+	pid = fork();
+	if(!pid)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		exit (1);
+	}
+	close(fd[1]);
+	waitpid(pid, NULL, 0);
+	close(fd[0]);
 }
 
 //Info de la variable PATH: https://es.ccm.net/ordenadores/linux/2408-bash-la-variable-de-entorno-path/
@@ -105,7 +119,7 @@ int main(int argc, char **argv, char **envp)
 	if (signal_handler() == 0)
 		return (0);
 	while (argv && argc)
-	{	
+	{
 		init_prompt(info);
 		info->input = readline(info->prompt);
 		if (info->input)
