@@ -51,10 +51,7 @@ int		create_simples (int i, t_info *info);
 int		create_word(t_info *info, int i, char charact);
 int		word_length(t_info *info, int i, char charact);
 void init_prompt(t_info *info);
-//Start (start_minishell.c)
-void    start_minishell(t_info *info);
-void    start_no_pipe(t_info *info);
-int    check_pipe_command(t_info *info);
+
 //Utils matrix (utils_matrix.c)
 void	free_matrix(char ***matrix);
 char	**add_value_matrix(char **matrix, char *newstr);
