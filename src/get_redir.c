@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_redir.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 15:36:01 by amantara          #+#    #+#             */
+/*   Updated: 2022/08/06 15:36:02 by amantara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern int	g_status;
-
 
 int	get_fd(int oldfd, char *path, int flags[2])
 {
@@ -13,11 +23,11 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	if (!path)
 		return (-1);
 	if (access(path, F_OK) == -1 && !flags[0])
-        write(1, "error", 5);
+		write(1, "error", 5);
 	else if (!flags[0] && access(path, R_OK) == -1)
-        write(1, "error", 5);
+		write(1, "error", 5);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
-        write(1, "error", 5);
+		write(1, "error", 5);
 	if (flags[0] && flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (flags[0] && !flags[1])
