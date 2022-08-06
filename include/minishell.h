@@ -135,3 +135,9 @@ void	*error(int err);
 void    checkInfoCdms(t_list *cmd);
 
 t_split	start_split();
+
+void	init_info(t_info *info, char **envp, char **argv);
+
+int	signal_handler(void);
+
+void	*exec_command(t_info *info, t_list *cmds);

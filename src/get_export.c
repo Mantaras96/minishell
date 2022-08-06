@@ -19,7 +19,6 @@ int	var_in_envp(char *argv, char **envp, int *j)
 
 	i = 0;
 	*j = 0;
-	ft_putnbr_fd(*j, 1);
 	pos = ft_strchr_i(argv, 61);
 	if (pos == -1)
 		return (-1);
@@ -54,9 +53,6 @@ int	search_value_string(char *argv, int value)
 	return (-1);
 }
 
-//Agregar valor a la matrix de info envp.
-// Si pos existe modificamos el valor mientras 
-// que si no existe creamos una nueva en la matrix.
 int	get_export(t_info *info)
 {
 	int	i;
@@ -102,7 +98,6 @@ int	count_var_envp(char *token, char **envp, int *j)
 	return (0);
 }
 
-//Eliminar un  valor de la matrix de info envp.
 int	get_unset(t_info *info, char **full_cmd)
 {
 	int		i;
@@ -121,12 +116,7 @@ int	get_unset(t_info *info, char **full_cmd)
 				free(full_cmd[i]);
 				full_cmd[i] = aux;
 			}
-			if (!var_in_envp(full_cmd[i], info->envp, &j))
-			{
-				free(info->envp[j]);
-				info->envp[j] = ft_strdup(full_cmd[i]);
-			}
-			else
+			if (var_in_envp(full_cmd[i], info->envp, &j))
 				info->envp = ft_matrix_replace_in(&info->envp, NULL, j);
 			i++;
 		}

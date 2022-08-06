@@ -20,10 +20,10 @@ char	**set_env(char *var, char *value, char **envp, int n)
 
 	if (n < 0)
 		n = ft_strlen(var);
-	i = 0;
+	i = -1;
 	aux1 = ft_strjoin(var, "=");
 	aux1 = ft_strjoin(aux1, value);
-	while (i < ft_matrix_len(envp))
+	while (++i < ft_matrix_len(envp))
 	{
 		j = n;
 		if (j < search_value_string(envp[i], '='))
@@ -35,7 +35,6 @@ char	**set_env(char *var, char *value, char **envp, int n)
 			envp[i] = aux1;
 			return (envp);
 		}
-		i++;
 	}
 	envp = add_value_matrix(envp, aux1);
 	free(aux1);

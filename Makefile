@@ -26,7 +26,9 @@ SRC	=	main.c \
 		remove_quotes.c \
 		heredoc_infile.c \
 		error.c \
-		check_info_cmds.c 
+		check_info_cmds.c \
+		init.c \
+		check_start2.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))

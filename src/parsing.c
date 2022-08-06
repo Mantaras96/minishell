@@ -70,18 +70,17 @@ void	counter(t_info *info)
 	}
 }
 
-int	parsing(t_info *info)
+int	start_parsing(t_info *info)
 {
 	int	i;
 
-	i = 0;
-	while (info->input[i])
+	i = -1;
+	while (info->input[++i])
 	{
 		if (info->input[i] == 34)
 			info->doubles++;
 		else if (info->input[i] == 39)
 			info->simples++;
-		i++;
 	}
 	if (info->doubles > 0 && info->doubles % 2 == 1)
 	{
@@ -97,6 +96,12 @@ int	parsing(t_info *info)
 		info->doubles = 0;
 		return (0);
 	}
+	return (0);
+}
+
+int	parsing(t_info *info)
+{
+	start_parsing(info);
 	info->counter = 0;
 	counter(info);
 	info->tokens = (char **)malloc(sizeof(char *) * (info->counter + 1));

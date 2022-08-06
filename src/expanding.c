@@ -37,7 +37,6 @@ static char	*get_substr_var(char *str, int i, t_info *prompt)
 	char	*path;
 	char	*var;
 
-	printf("Teo string: %s\n", str);
 	pos = ft_strchars_i(&str[i], "|\"\'$?>< ") + (ft_strchr("$?", str[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(str) - 1;
@@ -100,16 +99,14 @@ char	*expand_home(char *str, int i, int quotes[2], t_info *info)
 {
 	char	*path;
 	char	*aux;
-	int		q_simples;
-	int		q_doubles;
 
-	q_simples = 0;
-	q_doubles = 0;
+	quotes[0] = 0;
+	quotes[1] = 0;
 	while (str && str[++i])
 	{
-		q_simples = (q_simples + (!q_doubles && str[i] == '\'')) % 2;
-		q_doubles = (q_doubles + (!q_simples && str[i] == '\"')) % 2;
-		if (!q_simples && !q_doubles && str[i] == '~' && (i == 0 || \
+		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
+		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
+		if (!quotes[0] && !quotes[1] && str[i] == '~' && (i == 0 || \
 			str[i - 1] != '$'))
 		{
 			aux = ft_substr(str, 0, i);

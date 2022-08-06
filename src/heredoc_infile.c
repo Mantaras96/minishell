@@ -51,7 +51,6 @@ int	heredoc(char *str[2], char *aux[2])
 		return (-1);
 	}
 	str[1] = here_str(str, 0, aux[0], aux[1]);
-	write (fd[1], str[1], ft_strlen(str[1]));
 	free (str[1]);
 	close (fd[1]);
 	if (g_status == 130)

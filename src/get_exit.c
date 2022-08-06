@@ -35,7 +35,7 @@ int	get_exit(t_info *info, int *num_exit)
 	node = info->cmds->content;
 	*num_exit = !info->cmds->next;
 	if (*num_exit)
-		ft_putstr_fd("exit3", 2);
+		ft_putstr_fd("exit\n", 2);
 	if (!node->full_cmd || !node->full_cmd[1])
 		return (0);
 	ret = ft_atoi(info->tokens[1]);

@@ -78,7 +78,7 @@ void	init_env(t_info *info, char **argv)
 		free(aux);
 	}
 	else
-		info->envp = set_env("SHLVL", ft_itoa(ft_atoi(aux)), info->envp, 5);
+		info->envp = set_env("SHLVL", ft_itoa(ft_atoi(aux) + 1), info->envp, 5);
 	aux = get_env_value("PATH", info->envp, 4);
 	if (!aux)
 	{
