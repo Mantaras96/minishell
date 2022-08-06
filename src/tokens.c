@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:21:46 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 15:21:48 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/06 16:43:19 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,57 +27,57 @@ int	ft_is_space(char c, int comillas)
 	return (0);
 }
 
+void	jump_spaces_more(char *str, t_split *split)
+{
+	while (str[split->i] && ft_is_space(str[split->i], split->comillas))
+	{
+		if (str[split->i] == 39 || str[split->i] == 34)
+			split->comillas = 1;
+		split->i++;
+	}
+	while (str[split->i] && !ft_is_space(str[split->i], split->comillas))
+	{
+		split->size++;
+		split->i++;
+	}
+}
+
+char	**create_buff(char **buff, t_split *split)
+{
+	if (split->comillas)
+	{
+		buff[split->j] = malloc(sizeof (char) * (split->size + 3));
+		split->size = split->size + 2;
+		split->i++;
+	}
+	else
+		buff[split->j] = malloc(sizeof (char) * (split->size + 1));
+	return (buff);
+}
+
 char	**ft_split_all(char *str, t_info *info)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		size;
-	int		comillas;
+	t_split	split;
 	char	**buff;
 
 	buff = (char **)malloc(sizeof (char *) * (info->counter + 1));
-	i = 0;
-	j = 0;
-	k = 0;
-	size = 0;
-	comillas = 0;
-	while (str[i] && j < info->counter)
+	split = start_split();
+	while (str[split.i] && split.j < info->counter)
 	{
-		while (str[i] && ft_is_space(str[i], comillas))
+		jump_spaces_more(str, &split);
+		buff = create_buff(buff, &split);
+		split.k = 0;
+		while (split.size)
 		{
-			if (str[i] == 39 || str[i] == 34)
-				comillas = 1;
-			i++;
+			buff[split.j][split.k] = str[split.i - split.size];
+			split.size--;
+			split.k++;
 		}
-		while (str[i] && !ft_is_space(str[i], comillas))
-		{
-			size++;
-			i++;
-		}
-		if (comillas)
-		{
-			buff[j] = malloc(sizeof (char) * (size + 3));
-			size++;
-			size++;
-			i++;
-		}
-		else
-		{
-			buff[j] = malloc(sizeof (char) * (size + 1));
-		}
-		k = 0;
-		while (size)
-		{
-			buff[j][k] = str[i - size];
-			size--;
-			k++;
-		}
-		buff[j][k] = '\0';
-		j++;
-		comillas = 0;
+		buff[split.j][split.k] = '\0';
+		split.j++;
+		split.comillas = 0;
 	}
-	buff[j] = 0;
+	buff[split.j] = 0;
 	return (buff);
 }
 
