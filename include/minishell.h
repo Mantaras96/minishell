@@ -37,6 +37,16 @@ typedef struct s_commands
 	int		ofile;
 }		t_commands;
 
+typedef struct s_split
+{
+	int	i;
+	int	j;
+	int	k;
+	int	comillas;
+	int	size;
+}	t_split;
+
+
 int     get_pwd();
 int     ft_strcmp(const char *str1, const char *str2);
 void    print_star_minishell();
@@ -123,3 +133,5 @@ char *here_str(char *str[2], size_t len, char *aux_1, char * aux_2);
 void	*error(int err);
 
 void    checkInfoCdms(t_list *cmd);
+
+t_split	start_split();

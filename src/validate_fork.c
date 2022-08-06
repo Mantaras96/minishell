@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:09:40 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 15:09:44 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/06 16:42:56 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	*child_process(t_info *info, t_list *cmds, int p_fd[2])
 
 	c = cmds->content;
 	redir_process(cmds, p_fd);
-    //write(1, "foca2\n", 6);
 	close(p_fd[0]);
 	builtin_process(info, cmds, c);
 	exit(g_status);
@@ -71,19 +70,14 @@ void	exc_fork(t_info *info, t_list *cmds, int p_fd[2])
 	pid_t	pid;
 
 	pid = fork();
-    //checkInfoCdms(cmds);
 	if (pid < 0)
 	{
 		close(p_fd[0]);
 		close(p_fd[1]);
 	}
 	else if (!pid)
-    {
-        //write(1, "foca\n", 5);
 		child_process(info, cmds, p_fd);
-    }
 }
-
 
 void	*validate_fork(t_info *info, t_list *cmds, int p_fd[2])
 {
