@@ -99,7 +99,7 @@ void 	get_path(t_info *info);
 
 int is_builtin(t_commands *n);
 
-t_list *create_nodes(t_info *info);
+t_list	*create_nodes(t_info *info, int *i, t_list *cmd_1, t_list *cmd_2);
 t_commands *command_init(void);
 
 t_commands *get_outfile2(t_commands *node, char **temp2, int *i);
