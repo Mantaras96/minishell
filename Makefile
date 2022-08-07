@@ -8,7 +8,6 @@ SRC	=	main.c \
 		get_echo.c \
 		parsing.c \
 		tokens.c \
-		start_minishell.c \
 		utils_matrix.c \
 		utils_matrix2.c \
 		start_split.c \
@@ -26,9 +25,9 @@ SRC	=	main.c \
 		remove_quotes.c \
 		heredoc_infile.c \
 		error.c \
-		check_info_cmds.c \
 		init.c \
-		check_start2.c
+		check_start2.c \
+		init_env.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
