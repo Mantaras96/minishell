@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:52:20 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/06 16:04:47 by tmerida-         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:34:42 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,14 @@ static t_commands	*get_params(t_commands *node, char **temp1,
 	return (node);
 }
 
-t_list	*create_nodes(t_info *info)
+t_list	*create_nodes(t_info *info, int i, t_list *cmd_1, t_list *cmd_2)
 {
-	int			i;
-	t_list		*cmd_1;
-	t_list		*cmd_2;
 	char		**temp1;
 	char		**temp2;
 
-	i = 0;
-	cmd_1 = NULL;
 	temp2 = remove_quotes(info->tokens);
 	info->tokens = remove_quotes(info->tokens);
-	while (info->tokens[i])
+	while (info->tokens[++i])
 	{
 		cmd_2 = ft_lstlast(cmd_1);
 		if (i == 0 || (info->tokens[i][0] == '|' && info->tokens[i + 1]))
@@ -95,12 +90,11 @@ t_list	*create_nodes(t_info *info)
 			cmd_2 = ft_lstlast(cmd_1);
 		}
 		temp1 = info->tokens;
-		cmd_2->content = get_params(cmd_2->content, temp1, temp2, &i);
+		cmd_2->content = get_params(cmd_2->content, temp1, temp2, i);
 		if (i < 0)
 			return (stop_fill(cmd_1, info, temp2));
 		if (!info->tokens[i])
 			break ;
-		i++;
 	}
 	free_matrix(&temp2);
 	return (cmd_1);

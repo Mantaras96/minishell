@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:41:07 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/06 15:51:52 by tmerida-         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:34:10 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	*check_status(t_info *info, t_list *cmds)
 {
 	int	i;
 	int	num_exit;
+	t_list		*cmd_2;
 
-	i = 0;
 	num_exit = 0;
-	info->cmds = create_nodes(info);
+	info->cmds = create_nodes(info, -1, NULL, cmd_2);
 	if (!info->cmds)
 		return (info);
 	i = ft_lstsize(info->cmds);
