@@ -11,6 +11,7 @@
 #	include <signal.h>
 #	include <dirent.h>
 #	include <sys/stat.h>
+# include <sys/ioctl.h>
 
 typedef struct s_info
 {

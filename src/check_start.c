@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:41:07 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/07 12:34:10 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:38:45 by tmerida-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	free_cnt(void *content)
 
 void	*check_status(t_info *info, t_list *cmds)
 {
-	int	i;
-	int	num_exit;
+	int			i;
+	int			num_exit;
 	t_list		*cmd_2;
 
 	num_exit = 0;
@@ -68,6 +68,8 @@ void	*check_status(t_info *info, t_list *cmds)
 	g_status = builtin(info, info->cmds, &num_exit);
 	while (i-- > 0)
 		waitpid(-1, &g_status, 0);
+	if (!num_exit && g_status == 1)
+		g_status = 0;
 	if (g_status > 255)
 		g_status = g_status / 255;
 	if (info && num_exit)

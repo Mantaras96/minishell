@@ -19,7 +19,10 @@ int	signal_handler(void)
 	struct termios	termi;
 
 	if (tcgetattr(STDIN_FILENO, &termi) == -1)
+	{	
+		printf("salir");
 		return (0);
+	}
 	termi.c_lflag &= ~(ECHOCTL);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &termi) == -1)
 		return (0);
