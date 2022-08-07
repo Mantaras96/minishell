@@ -141,3 +141,5 @@ void	init_info(t_info *info, char **envp, char **argv);
 int	signal_handler(void);
 
 void	*exec_command(t_info *info, t_list *cmds);
+
+void	init_env(t_info *info, char **argv);
