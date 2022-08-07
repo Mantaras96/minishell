@@ -102,16 +102,13 @@ void	get_command(t_info *info, t_list *cmds, char **s, char *path)
 	c = cmds->content;
 	dir = get_dir(info, cmds, &s, path);
 	if (!is_builtin(c) && c && c->full_cmd && dir)
-		//es un directorio
-		write(1, "error\n", 6);
+		printf("Es un directorio\n");
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, F_OK) == -1)
-		//no hay directorio o fichero
-		write(1, "error\n", 6);
+		printf("No hay directorio o fichero\n");
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, X_OK) == -1)
-		//permission denied
-		write(1, "error\n", 6);
+		printf("Permission denied\n");
 	if (dir)
 		closedir(dir);
 	free_matrix(&s);
