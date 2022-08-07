@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:52:20 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/07 12:34:42 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:43:31 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_list	*create_nodes(t_info *info, int i, t_list *cmd_1, t_list *cmd_2)
 			cmd_2 = ft_lstlast(cmd_1);
 		}
 		temp1 = info->tokens;
-		cmd_2->content = get_params(cmd_2->content, temp1, temp2, i);
+		cmd_2->content = get_params(cmd_2->content, temp1, temp2, &i);
 		if (i < 0)
 			return (stop_fill(cmd_1, info, temp2));
 		if (!info->tokens[i])
