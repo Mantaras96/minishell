@@ -31,6 +31,8 @@ char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 			printf("%s (wanted `%s\')\n", aux_2, aux_1);
 			break ;
 		}
+		if (!ft_strcmp(str[0], aux_1))
+			break;
 		temp = str[0];
 		str[0] = ft_strjoin(str[0], "\n");
 		free(temp);
@@ -51,6 +53,7 @@ int	heredoc(char *str[2], char *aux[2])
 		return (-1);
 	}
 	str[1] = here_str(str, 0, aux[0], aux[1]);
+	write(fd[1], str[1], ft_strlen(str[1]));
 	free (str[1]);
 	close (fd[1]);
 	if (g_status == 130)

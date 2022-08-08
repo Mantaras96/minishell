@@ -12,8 +12,6 @@
 
 #include "../include/minishell.h"
 
-int	g_status;
-
 int	signal_handler(void)
 {
 	struct termios	termi;
