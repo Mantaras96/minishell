@@ -82,11 +82,6 @@ void	*check_status(t_info *info, t_list *cmds)
 
 void	*start_args(char *str, t_info *info)
 {
-	if (!str)
-	{
-		printf("exit");
-		return (NULL);
-	}
 	if (str[0] != '\0')
 		add_history(str);
 	info = check_status(info, info->cmds);

@@ -46,6 +46,7 @@ int	heredoc(char *str[2], char *aux[2])
 {
 	int	fd[2];
 
+	//printf("AUX %s\n", aux[0]);
 	g_status = 0;
 	if (pipe(fd) == -1)
 	{

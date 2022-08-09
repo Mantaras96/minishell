@@ -18,7 +18,7 @@ void	handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		printf("n");
+		printf("\n");
 		rl_replace_line("", 1);
 	}
 	else if (signum == SIGQUIT)
@@ -53,8 +53,10 @@ int	main(int argc, char **argv, char **envp)
 					break ;
 			}
 		}
-		else
+		else{
+			printf("exit\n");
 			exit (g_status);
+		}
 		free(info->input);
 	}
 	exit(g_status);
