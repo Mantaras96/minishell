@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:29:44 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 15:29:59 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:39:40 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_star_minishell(void)
 		aux = get_next_line(fd);
 		ft_printf("%s", aux);
 		i++;
+		free(aux);
 	}
 	close(fd);
 }
