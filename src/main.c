@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:38:08 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 13:12:17 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:47:23 by tmerida-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int	main(int argc, char **argv, char **envp)
 	while (42)
 	{
 		init_prompt(info);
-		info->input = readline(info->prompt);
 		if (info->input)
 		{
-				parsing(info);
-				expanding(info);
-				if (!start_args(info->input, info))
-					break ;
+			parsing(info);
+			expanding(info);
+			if (!start_args(info->input, info))
+				break ;
 		}
 		else
 		{

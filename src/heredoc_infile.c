@@ -30,7 +30,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-
 char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 {
 	char	*temp;
