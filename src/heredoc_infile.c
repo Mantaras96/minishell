@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:34:19 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 15:34:29 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:11:50 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 			printf("%s (wanted `%s\')\n", aux_2, aux_1);
 			break ;
 		}
+		if (!ft_strcmp(str[0], aux_1))
+			break ;
 		temp = str[0];
 		str[0] = ft_strjoin(str[0], "\n");
 		free(temp);
@@ -63,7 +65,6 @@ char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 int	heredoc(char *str[2], char *aux[2])
 {
 	int	fd[2];
-
 
 	g_status = 0;
 	if (pipe(fd) == -1)
