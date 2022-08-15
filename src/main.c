@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:38:08 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 16:26:39 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:31:21 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		g_status = 130;
 		printf("\n");
 		rl_replace_line("", 1);
 	}
 	else if (signum == SIGQUIT)
 	{
-		printf("exit22");
 		rl_replace_line("", 0);
 	}
 	rl_on_new_line();
@@ -42,15 +42,12 @@ int	main(int argc, char **argv, char **envp)
 	while (42)
 	{
 		init_prompt(info);
-		info->input = readline(info->prompt);
 		if (info->input)
 		{
-			if (parsing(info))
-			{
-				expanding(info);
-				if (!start_args(info->input, info))
-					break ;
-			}
+			parsing(info);
+			expanding(info);
+			if (!start_args(info->input, info))
+				break ;
 		}
 		else
 		{

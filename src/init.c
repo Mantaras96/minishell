@@ -62,6 +62,7 @@ void	init_prompt(t_info *info)
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
 	close(fd[0]);
+	info->input = readline(info->prompt);
 }
 
 void	init_info(t_info *info, char **envp, char **argv)
