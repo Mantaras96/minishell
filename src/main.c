@@ -46,12 +46,10 @@ int	main(int argc, char **argv, char **envp)
 		info->input = readline(info->prompt);
 		if (info->input)
 		{
-			if (parsing(info))
-			{
+				parsing(info);
 				expanding(info);
 				if (!start_args(info->input, info))
 					break ;
-			}
 		}
 		else{
 			printf("exit\n");

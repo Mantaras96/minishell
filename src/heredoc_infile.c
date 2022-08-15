@@ -14,29 +14,47 @@
 
 extern int	g_status;
 
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (s1[i] == '\0' || s2[i] == '\0')
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+
 char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 {
 	char	*temp;
 
-	while (g_status != 130 && (!str[0] || ft_strcmp(str[0], aux_1) \
-		|| ft_strlen(aux_1) != len))
+	while (g_status != 130 && (!str[0]) || ft_strncmp(str[0], aux_1, len) \
+		|| ft_strlen(aux_1) != len)
 	{
+		//rintf("AUX %s\n", aux_1);
 		temp = str[1];
 		str[1] = ft_strjoin(str[1], str[0]);
 		free(temp);
 		free(str[0]);
 		str[0] = readline("> ");
+		//printf("STR %s\n", str[0]);
 		if (!str[0])
 		{
 			printf("%s (wanted `%s\')\n", aux_2, aux_1);
 			break ;
 		}
-		if (!ft_strcmp(str[0], aux_1))
-			break;
 		temp = str[0];
 		str[0] = ft_strjoin(str[0], "\n");
 		free(temp);
-		len = ft_strlen(str[0] -1);
+		len = ft_strlen(str[0]) - 1;
 	}
 	free (str[0]);
 	return (str[1]);
@@ -46,7 +64,7 @@ int	heredoc(char *str[2], char *aux[2])
 {
 	int	fd[2];
 
-	//printf("AUX %s\n", aux[0]);
+
 	g_status = 0;
 	if (pipe(fd) == -1)
 	{
