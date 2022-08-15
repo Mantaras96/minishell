@@ -18,12 +18,12 @@ void	handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		g_status = 130;
 		printf("\n");
 		rl_replace_line("", 1);
 	}
 	else if (signum == SIGQUIT)
 	{
-		printf("exit22");
 		rl_replace_line("", 0);
 	}
 	rl_on_new_line();
