@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:38:08 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/06 16:40:36 by tmerida-         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:12:17 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	handler(int signum)
 	rl_redisplay();
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	*info;
@@ -53,7 +52,8 @@ int	main(int argc, char **argv, char **envp)
 					break ;
 			}
 		}
-		else{
+		else
+		{
 			printf("exit\n");
 			exit (g_status);
 		}
