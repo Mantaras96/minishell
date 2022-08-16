@@ -36,7 +36,9 @@ int	builtin(t_info *info, t_list *cmds, int *num_exit)
 			exec_command(info, cmds);
 		}
 		cmds = cmds->next;
+		free_matrix(&c_full);
 	}
+	//ft_lstclear(&cmds, free_cnt);
 	return (g_status);
 }
 

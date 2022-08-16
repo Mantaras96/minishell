@@ -77,26 +77,25 @@ t_list	*create_nodes(t_info *info, int i, t_list *cmd_1, t_list *cmd_2)
 {
 	char		**temp1;
 	char		**temp2;
+	char		**temp3;
 
 	temp2 = remove_quotes(info->tokens);
-	info->tokens = remove_quotes(info->tokens);
-	while (info->tokens[++i])
+	while (temp2[++i])
 	{
 		cmd_2 = ft_lstlast(cmd_1);
-		if (i == 0 || (info->tokens[i][0] == '|' && info->tokens[i + 1]))
+		if (i == 0 || (temp2[i][0] == '|' && temp2[i + 1]))
 		{
-			i += info->tokens[i][0] == '|';
+			i += temp2[i][0] == '|';
 			ft_lstadd_back(&cmd_1, ft_lstnew(command_init()));
 			cmd_2 = ft_lstlast(cmd_1);
 		}
-		temp1 = info->tokens;
+		temp1 = temp2;
 		cmd_2->content = get_params(cmd_2->content, temp1, temp2, &i);
 		if (i < 0)
 			return (stop_fill(cmd_1, info, temp2));
-		if (!info->tokens[i])
+		if (!temp2[i])
 			break ;
 	}
-	free_matrix(&temp1);
 	free_matrix(&temp2);
 	return (cmd_1);
 }
