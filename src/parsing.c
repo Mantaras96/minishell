@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:32:35 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/07 13:01:58 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:34:37 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,18 @@ int	parsing(t_info *info)
 	{
 		info->counter = 0;
 		counter(info);
-		info->tokens = (char **)malloc(sizeof(char *) * (info->counter + 1));
-		info->tokens[info->counter] = 0;
-		if (!info->simples && !info->doubles)
-			info->tokens = ft_split(info->input, 32);
-		else
-			create_tokens(info);
+		// if (!info->simples && !info->doubles){
+		// 	info->tokens = ft_split(info->input, 32);
+
+		// }
+		// else
+		create_tokens(info);
+		// int i = 0;
+		// while (info->tokens[i]){
+		// 	printf("Token:%s\n",info->tokens[i]);
+		// 	i++;
+		// }
+
 		info->simples = 0;
 		info->doubles = 0;
 		return (1);

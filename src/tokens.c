@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:21:46 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 16:43:19 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:14:03 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void	create_tokens(t_info *info)
 	i = 0;
 	str = ft_split_all(info->input, info);
 	info->tokens = ft_strdup_matrix(str);
+	free_matrix(&str);
 }

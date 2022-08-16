@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:38:08 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 16:31:21 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:42:05 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			parsing(info);
 			expanding(info);
-			if (!start_args(info->input, info))
+			if (!start_args(info->input, info)){
+				free_matrix(&info->tokens);
 				break ;
+			}
+				free_matrix(&info->tokens);	
 		}
 		else
 		{

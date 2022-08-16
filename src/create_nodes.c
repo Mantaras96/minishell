@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:52:20 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/07 12:43:31 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:44:18 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_list	*create_nodes(t_info *info, int i, t_list *cmd_1, t_list *cmd_2)
 		if (!info->tokens[i])
 			break ;
 	}
+	free_matrix(&temp1);
 	free_matrix(&temp2);
 	return (cmd_1);
 }

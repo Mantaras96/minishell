@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:42:39 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 13:39:57 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:16:42 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ void	mini_getpid(t_info *info)
 void	init_prompt(t_info *info)
 {
 	char	*aux;
+	char	*str;
 	pid_t	pid;
 	int		fd[2];
 
-	aux = ft_strjoin("\033[1;33m", getcwd(NULL, 0));
+	str = getcwd(NULL, 0);
+	aux = ft_strjoin("\033[1;33m", str);
+	free(str);
 	info->prompt = ft_strjoin(aux, "--ENCUERAO🦄🦹--->$ \033[1;00m");
 	pipe(fd);
 	pid = fork();
@@ -63,6 +66,8 @@ void	init_prompt(t_info *info)
 	waitpid(pid, NULL, 0);
 	close(fd[0]);
 	info->input = readline(info->prompt);
+	free(aux);
+	free(info->prompt);
 }
 
 void	init_info(t_info *info, char **envp, char **argv)

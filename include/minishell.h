@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:21:51 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/15 13:24:59 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:24:30 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			get_unset(t_info *info, char **full_cmd);
 int			get_export(t_info *info);
 int			search_value_string(char *argv, int value);
 int			get_cd(t_info *info);
-int			go_home(void);
+int			go_home(t_info *info);
 void		update_pwd(t_info *info);
 //Expanding
 int			expanding(t_info *info);
@@ -131,5 +131,4 @@ void		init_info(t_info *info, char **envp, char **argv);
 int			signal_handler(void);
 void		*exec_command(t_info *info, t_list *cmds);
 void		init_env(t_info *info, char **argv);
-
 #endif
