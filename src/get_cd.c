@@ -26,6 +26,7 @@ int	go_home(t_info *info)
 		g_status = 1;
 	}
 	update_pwd(info);
+	free(path);
 	return (g_status);
 }
 
@@ -36,6 +37,7 @@ int	go_last(t_info *info)
 	g_status = 0;
 	path = get_env_value("OLDPWD", info->envp, 6);
 	chdir(path);
+	free(path);
 	update_pwd(info);
 	return (g_status);
 }
@@ -62,6 +64,8 @@ void	update_pwd(t_info *info)
 	pwd = getcwd(NULL, 0);
 	info->envp = set_env("OLDPWD", oldpwd, info->envp, 6);
 	info->envp = set_env("PWD", pwd, info->envp, 3);
+	free(pwd);
+	free(oldpwd);
 }
 
 int	get_cd(t_info *info)
