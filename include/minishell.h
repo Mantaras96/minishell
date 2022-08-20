@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:21:51 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/16 16:24:30 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/20 12:12:01 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int			search_value_string(char *argv, int value);
 char		*get_env_value(char *var, char **envp, int n);
 int			count_var_envp(char *token, char **envp, int *j);
 int			get_exit(t_info *info, int *num_exit);
-void		free_tokens(t_info *info);
 int			count_var_envp(char *token, char **envp, int *j);
 //Get (export.c)
 int			count_var_envp(char *token, char **envp, int *j);
@@ -131,4 +130,5 @@ void		init_info(t_info *info, char **envp, char **argv);
 int			signal_handler(void);
 void		*exec_command(t_info *info, t_list *cmds);
 void		init_env(t_info *info, char **argv);
+void		*print_error (int c_err, char *param, int err);
 #endif

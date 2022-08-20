@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:41:07 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/16 18:45:46 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/20 11:49:23 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	*check_status(t_info *info, t_list *cmds)
 	t_list		*cmd_2;
 
 	num_exit = 0;
+	
 	info->cmds = create_nodes(info, -1, NULL, cmd_2);
 	if (!info->cmds)
 		return (info);
@@ -79,6 +80,7 @@ void	*check_status(t_info *info, t_list *cmds)
 		ft_lstclear(&info->cmds, free_cnt);
 		return (NULL);
 	}
+	//ft_lstclear(&cmds, free_cnt);
 	return (info);
 }
 

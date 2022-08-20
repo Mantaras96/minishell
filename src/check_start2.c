@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_start.c                                      :+:      :+:    :+:   */
+/*   check_start2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:19:43 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/06 15:40:50 by tmerida-         ###   ########.fr       */
+/*   Updated: 2022/08/20 12:13:06 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@ DIR	*get_dir(t_info *info, t_list *cmds, char ***s, char *path)
 		*s = ft_split(path, ':');
 		free(path);
 		c->full_path = find_cmd(*s, *c->full_cmd, c->full_path);
-		if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0])
-			printf("Command Not found\n");
+		if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0]){
+			print_error(1, *c->full_cmd, 127);
+		}
 	}
 	return (dir);
 }
@@ -102,16 +103,17 @@ void	get_command(t_info *info, t_list *cmds, char **s, char *path)
 	c = cmds->content;
 	dir = get_dir(info, cmds, &s, path);
 	if (!is_builtin(c) && c && c->full_cmd && dir)
-		printf("Es un directorio\n");
+		print_error(1, *c->full_cmd, 126); // Es un directorio
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, F_OK) == -1)
-		printf("No hay directorio o fichero\n");
+		print_error(1, c->full_path, 127); // No es un directorio
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, X_OK) == -1)
-		printf("Permission denied\n");
+		print_error(1, c->full_path, 126); // No tiene permisos.
 	if (dir)
 		closedir(dir);
 	free_matrix(&s);
+	//free(path);
 }
 
 void	*exec_command(t_info *info, t_list *cmds)

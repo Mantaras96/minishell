@@ -27,7 +27,8 @@ SRC	=	main.c \
 		error.c \
 		init.c \
 		check_start2.c \
-		init_env.c
+		init_env.c \
+		print_error.c
 
 
 OBJ	= $(addprefix objs/,$(SRC:.c=.o))
