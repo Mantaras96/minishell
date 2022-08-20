@@ -14,12 +14,11 @@
 
 extern int	g_status;
 
-void *print_error (int c_err, char *param, int err){
-
-    if (c_err == 1){
+void	*print_error(int c_err, char *param, int err)
+{
+	if (c_err == 1)
 		ft_putstr_fd("minishell: command not found: ", 2);
-    }
-    g_status = error;
-    ft_putendl_fd(param, 2);
+	g_status = err;
+	ft_putendl_fd(param, 2);
 	return (NULL);
 }

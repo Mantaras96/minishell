@@ -75,27 +75,27 @@ char	*expand_vars(char *str, int i, t_info *info)
 	return (str);
 }
 
-int	expanding(t_info *info)
+char	**expanding(t_info *info, char **args)
 {
 	char	**aux;
 	int		i;
 	int		quotes[2];
 
 	i = 0;
-	while (info->tokens && info->tokens[i])
+	while (args && args[i])
 	{
-		info->tokens[i] = expand_vars(info->tokens[i], -1, info);
-		info->tokens[i] = expand_home(info->tokens[i], -1, quotes, info);
-		aux = ft_cmdsubsplit(info->tokens[i], "><|");
-		ft_matrix_replace_in(&info->tokens, aux, i);
+		args[i] = expand_vars(args[i], -1, info);
+		args[i] = expand_home(args[i], -1, quotes, info, get_env_value("HOME", info->envp, 4));
+		aux = ft_cmdsubsplit(args[i], "><|");
+		ft_matrix_replace_in(&args, aux, i);
 		i += ft_matrix_len(aux) - 1;
 		free_matrix(&aux);
 		i++;
 	}
-	return (0);
+	return (args);
 }
 
-char	*expand_home(char *str, int i, int quotes[2], t_info *info)
+char	*expand_home(char *str, int i, int quotes[2], t_info *info, char *home)
 {
 	char	*path;
 	char	*aux;
@@ -110,16 +110,16 @@ char	*expand_home(char *str, int i, int quotes[2], t_info *info)
 			str[i - 1] != '$'))
 		{
 			aux = ft_substr(str, 0, i);
-			path = ft_strjoin(aux, get_env_value("HOME", info->envp, 4));
+			path = ft_strjoin(aux, home);
 			free(aux);
 			aux = ft_substr(str, i + 1, ft_strlen(str));
 			free(str);
 			str = ft_strjoin(path, aux);
 			free(aux);
 			free(path);
-			return (expand_home(str, i + ft_strlen(get_env_value("HOME",
-							info->envp, 4)) - 1, quotes, info));
+			return (expand_home(str, i + ft_strlen(home) - 1, quotes, info, home));
 		}
 	}
+	free(home);
 	return (str);
 }

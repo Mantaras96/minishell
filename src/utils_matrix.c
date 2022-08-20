@@ -61,6 +61,11 @@ char	**ft_strdup_matrix(char **matrix)
 	while (matrix[i])
 	{
 		m_return[i] = ft_strdup(matrix[i]);
+		if (!m_return[i])
+		{
+			free_matrix(&m_return);
+			return (NULL);
+		}
 		i++;
 	}
 	m_return[i] = NULL;

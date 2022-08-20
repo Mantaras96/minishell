@@ -36,7 +36,7 @@ char	**set_env(char *var, char *value, char **envp, int n)
 		}
 	}
 	envp = add_value_matrix(envp, aux1[1]);
-	free(aux1[0]);
+	free(aux1[1]);
 	return (envp);
 }
 

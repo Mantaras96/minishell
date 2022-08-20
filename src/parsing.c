@@ -99,27 +99,15 @@ int	start_parsing(t_info *info)
 	return (1);
 }
 
-int	parsing(t_info *info)
+char	**parsing(t_info *info)
 {
 	if (start_parsing(info))
 	{
 		info->counter = 0;
 		counter(info);
-		// if (!info->simples && !info->doubles){
-		// 	info->tokens = ft_split(info->input, 32);
-
-		// }
-		// else
-		create_tokens(info);
-		// int i = 0;
-		// while (info->tokens[i]){
-		// 	printf("Token:%s\n",info->tokens[i]);
-		// 	i++;
-		// }
-
 		info->simples = 0;
 		info->doubles = 0;
-		return (1);
+		return (create_tokens(info));
 	}
-	return (0);
+	return (NULL);
 }

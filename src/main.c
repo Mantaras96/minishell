@@ -33,6 +33,8 @@ void	handler(int signum)
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	*info;
+	char	*str;
+	char	*out;
 
 	(void)argc;
 	info = (t_info *)malloc(sizeof(t_info));
@@ -42,22 +44,8 @@ int	main(int argc, char **argv, char **envp)
 	while (42)
 	{
 		init_prompt(info);
-		if (info->input)
-		{
-			parsing(info);
-			expanding(info);
-			if (!start_args(info->input, info)){
-				free_matrix(&info->tokens);
-				break ;
-			}
-				free_matrix(&info->tokens);	
-		}
-		else
-		{
-			printf("exit\n");
-			exit (g_status);
-		}
-		free(info->input);
+		if (!start_args(info->input, info))
+			break ;
 	}
 	exit(g_status);
 }

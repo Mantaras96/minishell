@@ -40,62 +40,63 @@ void	free_content(void *content)
 	free(node);
 }
 
-static t_list	*stop_fill(t_list *cmds, t_info *info, char **temp)
+static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 {
 	ft_lstclear(&cmds, free_content);
 	free_matrix(&temp);
-	free_matrix(&info->tokens);
+	free_matrix(&args);
 	return (NULL);
 }
 
-static t_commands	*get_params(t_commands *node, char **temp1,
-		char **temp2, int *i)
+static t_commands	*get_params(t_commands *node, char **args[2], int *i)
 {
-	if (temp1[*i])
+	if (args[0][*i])
 	{
-		if (temp1[*i][0] == '>' && temp1[*i + 1] && temp1[*i + 1][0] == '>')
-			node = get_outfile2(node, temp2, i);
-		else if (temp1[*i][0] == '>')
-			node = get_outfile1(node, temp2, i);
-		else if (temp1[*i][0] == '<' && temp1[*i + 1] && \
-			temp1[*i + 1][0] == '<')
-			node = get_infile2(node, temp2, i);
-		else if (temp1[*i][0] == '<')
-			node = get_infile1(node, temp2, i);
-		else if (temp1[*i][0] != '|')
-			node->full_cmd = add_value_matrix(node->full_cmd, temp2[*i]);
+		if (args[0][*i][0] == '>' && args[0][*i + 1]
+				&& args[0][*i + 1][0] == '>')
+			node = get_outfile2(node, args[1], i);
+		else if (args[0][*i][0] == '>')
+			node = get_outfile1(node, args[1], i);
+		else if (args[0][*i][0] == '<' && args[0][*i + 1] && \
+			args[0][*i + 1][0] == '<')
+			node = get_infile2(node, args[1], i);
+		else if (args[0][*i][0] == '<')
+			node = get_infile1(node, args[1], i);
+		else if (args[0][*i][0] != '|')
+			node->full_cmd = add_value_matrix(node->full_cmd, args[1][*i]);
 		else
 			*i = -2;
 		return (node);
 	}
-	write(1, "error", 5);
+	print_error(1, NULL, 2);
 	*i = -2;
 	return (node);
 }
 
-t_list	*create_nodes(t_info *info, int i, t_list *cmd_1, t_list *cmd_2)
+t_list	*create_nodes(char **args, int i)
 {
-	char		**temp1;
-	char		**temp2;
-	char		**temp3;
+	t_list	*cmds[2];
+	char	**temp[2];
 
-	temp2 = remove_quotes(info->tokens);
-	while (temp2[++i])
+	cmds[0] = NULL;
+	temp[1] = remove_quotes(args);
+	while (args[++i])
 	{
-		cmd_2 = ft_lstlast(cmd_1);
-		if (i == 0 || (temp2[i][0] == '|' && temp2[i + 1]))
+		cmds[1] = ft_lstlast(cmds[0]);
+		if (i == 0 || (args[i][0] == '|' && args[i + 1]))
 		{
-			i += temp2[i][0] == '|';
-			ft_lstadd_back(&cmd_1, ft_lstnew(command_init()));
-			cmd_2 = ft_lstlast(cmd_1);
+			i += args[i][0] == '|';
+			ft_lstadd_back(&cmds[0], ft_lstnew(command_init()));
+			cmds[1] = ft_lstlast(cmds[0]);
 		}
-		temp1 = temp2;
-		cmd_2->content = get_params(cmd_2->content, temp1, temp2, &i);
+		temp[0] = args;
+		cmds[1]->content = get_params(cmds[1]->content, temp, &i);
 		if (i < 0)
-			return (stop_fill(cmd_1, info, temp2));
-		if (!temp2[i])
+			return (stop_fill(cmds[0], args, temp[1]));
+		if (!args[i])
 			break ;
 	}
-	free_matrix(&temp2);
-	return (cmd_1);
+	free_matrix(&temp[1]);
+	free_matrix(&args);
+	return (cmds[0]);
 }

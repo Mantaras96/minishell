@@ -55,24 +55,26 @@ int	search_value_string(char *argv, int value)
 
 int	get_export(t_info *info)
 {
-	int	i;
-	int	j;
-	int	pos;
+	int		i;
+	int		j;
+	int		pos;
+	char	**argv;
 
 	i = 1;
 	j = 0;
+	argv = ((t_commands *)info->cmds->content)->full_cmd;
 	if (info->counter >= 2)
 	{
 		while (i < info->counter)
 		{
-			pos = count_var_envp(info->tokens[i], info->envp, &j);
+			pos = count_var_envp(argv[i], info->envp, &j);
 			if (pos == 1)
 			{
 				free(info->envp[j]);
-				info->envp[j] = ft_strdup(info->tokens[i]);
+				info->envp[j] = ft_strdup(argv[i]);
 			}
 			else if (!pos)
-				info->envp = add_value_matrix(info->envp, info->tokens[i]);
+				info->envp = add_value_matrix(info->envp, argv[i]);
 		i++;
 		}
 	}

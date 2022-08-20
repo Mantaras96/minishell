@@ -14,7 +14,7 @@
 
 extern int	g_status;
 
-int	go_home(t_info *info)
+int	go_home(t_info *info, char **args)
 {
 	char	*path;
 
@@ -22,7 +22,7 @@ int	go_home(t_info *info)
 	path = get_env_value("HOME", info->envp, 4);
 	if (chdir(path))
 	{
-		printf("%s%s\n", info->tokens[0], ": HOME not set");
+		printf("%s%s\n", args[0], ": HOME not set");
 		g_status = 1;
 	}
 	update_pwd(info);
@@ -42,16 +42,20 @@ int	go_last(t_info *info)
 	return (g_status);
 }
 
-int	go_path(t_info *info)
+int	go_path(t_info *info, char **args)
 {
+	char	*path;
+
 	g_status = 0;
-	if (chdir(info->tokens[1]))
+	path = get_env_value("HOME", info->envp, 4);
+	if (chdir(path))
 	{
-		printf("%s%s%s\n", info->tokens[0],
-			": no such file or directory: ", info->tokens[1]);
+		printf("%s%s%s\n", args[0],
+			": no such file or directory: ", args[1]);
 		g_status = 1;
 	}
 	update_pwd(info);
+	free(path);
 	return (g_status);
 }
 
@@ -70,17 +74,19 @@ void	update_pwd(t_info *info)
 
 int	get_cd(t_info *info)
 {
-	if ((!ft_strcmp(info->tokens[0], "cd") && info->counter == 1)
-		|| (!ft_strcmp(info->tokens[1], "~") && info->counter == 2))
-		g_status = go_home(info);
-	else if (!ft_strcmp(info->tokens[1], "..") && info->counter == 2)
+	char	**args;
+
+	args = ((t_commands *)info->cmds->content)->full_cmd;
+	if (!ft_strcmp(args[0], "cd") && info->counter == 1)
+		g_status = go_home(info, args);
+	else if (!ft_strcmp(args[1], "..") && info->counter == 2)
 	{
 		chdir("..");
 		update_pwd(info);
 	}
-	else if (!ft_strcmp(info->tokens[1], "-") && info->counter == 2)
+	else if (!ft_strcmp(args[1], "-") && info->counter == 2)
 		g_status = go_last(info);
 	else
-		g_status = go_path(info);
+		g_status = go_path(info, args);
 	return (g_status);
 }

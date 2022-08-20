@@ -61,6 +61,7 @@ void	*child_process(t_info *info, t_list *cmds, int p_fd[2])
 	redir_process(cmds, p_fd);
 	close(p_fd[0]);
 	builtin_process(info, cmds, c);
+	ft_lstclear(&info->cmds, free_cnt);
 	exit(g_status);
 }
 

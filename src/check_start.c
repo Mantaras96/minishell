@@ -21,13 +21,13 @@ int	builtin(t_info *info, t_list *cmds, int *num_exit)
 	while (cmds)
 	{
 		c_full = ((t_commands *)cmds->content)->full_cmd;
-		if (c_full && !ft_strcmp (info->tokens[0], "exit"))
+		if (c_full && !ft_strcmp (c_full[0], "exit"))
 			g_status = get_exit(info, num_exit);
-		else if (!cmds->next && c_full && !ft_strcmp(info->tokens[0], "export"))
+		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "export"))
 			g_status = get_export(info);
-		else if (!cmds->next && c_full && !ft_strcmp(info->tokens[0], "cd"))
+		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "cd"))
 			g_status = get_cd(info);
-		else if (!cmds->next && c_full && !ft_strcmp(info->tokens[0], "unset"))
+		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "unset"))
 			g_status = get_unset(info, c_full);
 		else
 		{
@@ -36,9 +36,7 @@ int	builtin(t_info *info, t_list *cmds, int *num_exit)
 			exec_command(info, cmds);
 		}
 		cmds = cmds->next;
-		free_matrix(&c_full);
 	}
-	//ft_lstclear(&cmds, free_cnt);
 	return (g_status);
 }
 
@@ -49,22 +47,21 @@ void	free_cnt(void *content)
 	node = content;
 	free_matrix(&node->full_cmd);
 	free(node->full_path);
-	if (node->ifile != STDOUT_FILENO)
+	if (node->ifile != STDIN_FILENO)
 		close(node->ifile);
 	if (node->ofile != STDOUT_FILENO)
 		close(node->ofile);
 	free(node);
 }
 
-void	*check_status(t_info *info, t_list *cmds)
+void	*check_status(t_info *info, t_list *cmds, char **args)
 {
 	int			i;
 	int			num_exit;
 	t_list		*cmd_2;
 
 	num_exit = 0;
-	
-	info->cmds = create_nodes(info, -1, NULL, cmd_2);
+	info->cmds = create_nodes(args, -1);
 	if (!info->cmds)
 		return (info);
 	i = ft_lstsize(info->cmds);
@@ -75,19 +72,30 @@ void	*check_status(t_info *info, t_list *cmds)
 		g_status = 0;
 	if (g_status > 255)
 		g_status = g_status / 255;
-	if (info && num_exit)
+	if (args && num_exit)
 	{
 		ft_lstclear(&info->cmds, free_cnt);
 		return (NULL);
 	}
-	//ft_lstclear(&cmds, free_cnt);
 	return (info);
 }
 
 void	*start_args(char *str, t_info *info)
 {
+	char	**args;
+
+	if (!str)
+	{
+		printf("exit\n");
+		return (NULL);
+	}
 	if (str[0] != '\0')
 		add_history(str);
-	info = check_status(info, info->cmds);
+	args = parsing(info);
+	free(str);
+	args = expanding(info, args);
+	info = check_status(info, info->cmds, args);
+	if (info && info->cmds)
+		ft_lstclear(&info->cmds, free_cnt);
 	return (info);
 }

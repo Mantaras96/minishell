@@ -88,10 +88,10 @@ DIR	*get_dir(t_info *info, t_list *cmds, char ***s, char *path)
 		*s = ft_split(path, ':');
 		free(path);
 		c->full_path = find_cmd(*s, *c->full_cmd, c->full_path);
-		if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0]){
+		if (!c->full_path || !c->full_cmd[0] || !c->full_cmd[0][0])
 			print_error(1, *c->full_cmd, 127);
-		}
 	}
+	free_matrix(s);
 	return (dir);
 }
 
@@ -113,7 +113,7 @@ void	get_command(t_info *info, t_list *cmds, char **s, char *path)
 	if (dir)
 		closedir(dir);
 	free_matrix(&s);
-	//free(path);
+	free(path);
 }
 
 void	*exec_command(t_info *info, t_list *cmds)

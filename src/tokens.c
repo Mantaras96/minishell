@@ -83,13 +83,12 @@ char	**ft_split_all(char *str, t_info *info)
 
 //aqui empieza la fumada padre, aqui basicamente guardamos 
 //las palabras, que habran a partir de nuestro contador de antes
-void	create_tokens(t_info *info)
+char	**create_tokens(t_info *info)
 {
 	char	**str;
 	int		i;
 
 	i = 0;
 	str = ft_split_all(info->input, info);
-	info->tokens = ft_strdup_matrix(str);
-	free_matrix(&str);
+	return (str);
 }

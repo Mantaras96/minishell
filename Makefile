@@ -16,7 +16,6 @@ SRC	=	main.c \
 		get_exit.c \
 		get_cd.c \
 		expanding.c \
-		get_path.c \
 		create_nodes.c \
 		get_redir.c \
 		check_start.c \
