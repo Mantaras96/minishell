@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:29:44 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/15 13:39:40 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:41:08 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_star_minishell(void)
 	while (i < 5)
 	{
 		aux = get_next_line(fd);
-		ft_printf("%s", aux);
+		printf("%s", aux);
 		i++;
 		free(aux);
 	}

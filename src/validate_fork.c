@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:09:40 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/21 12:48:55 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:50:03 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*redir_process(t_list *cmd, int fd[2])
 
 	c = cmd->content;
 	if (c->ifile != STDIN_FILENO)
+	
 	{
 		if (dup2(c->ifile, STDIN_FILENO) == -1)
 			return (print_error(10, NULL, 1));

@@ -1,8 +1,8 @@
 NAME	=	minishell
 
 SRC	=	main.c \
-		../42_get_next_line/get_next_line_utils.c \
-		../42_get_next_line/get_next_line.c \
+		get_next_line_utils.c \
+		get_next_line.c \
 		get_pwd.c \
 		print_flowers.c \
 		get_echo.c \
@@ -30,7 +30,7 @@ SRC	=	main.c \
 		print_error.c
 
 
-OBJ	= $(addprefix objs/,$(SRC:.c=.o))
+OBJ	= $(addprefix objs/,$(SRC:%.c=%.o))
 
 CC	=	gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -41,22 +41,33 @@ objs/%.o:src/%.c
 
 all:	$(NAME)
 
-printf:
-	@make -C ./ft_printf
+$(NAME): $(OBJ) include/minishell.h compile_libft
+	@echo "Compilar normal"
+	@$(CC) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib libft/libft.a -o $(NAME)
 
-
-$(NAME): $(OBJ) include/minishell.h printf
-	
-	@$(CC) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib ft_printf/libftprintf.a -o $(NAME)
+compile_libft:
+	@make -C ./libft
+	@make bonus -C ./libft
 
 clean:
 	@rm -rf $(OBJS_DIR)
 	@rm -rf ./objs
 
 fclean:	clean
-	@make fclean -C ./ft_printf
+	@make fclean -C ./libft
 	@rm -f $(NAME)
 
 re:	fclean all
 
 .PHONY: all re clean fclean
+
+# Colors
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m

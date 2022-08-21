@@ -6,16 +6,15 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:21:51 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/21 12:18:27 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:52:03 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../ft_printf/include/ft_printf.h"
-# include "../ft_printf/include/libft.h"
-# include "../42_get_next_line/get_next_line.h"
+# include "../libft/libft.h"
+# include "./get_next_line.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <limits.h>

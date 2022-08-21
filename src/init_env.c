@@ -6,13 +6,13 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:30:54 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 16:27:12 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:41:19 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	*init_env2(t_info *info)
+void	init_env2(t_info *info)
 {
 	char	*temp;
 	char	*num;
