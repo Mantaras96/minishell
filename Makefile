@@ -41,8 +41,12 @@ objs/%.o:src/%.c
 
 all:	$(NAME)
 
-$(NAME): $(OBJ) include/minishell.h
+printf:
 	@make -C ./ft_printf
+
+
+$(NAME): $(OBJ) include/minishell.h printf
+	
 	@$(CC) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib ft_printf/libftprintf.a -o $(NAME)
 
 clean:
