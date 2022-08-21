@@ -60,7 +60,6 @@ void	init_prompt(t_info *info)
 	pid = fork();
 	if (!pid)
 	{
-		print_error(7, NULL, 1);
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);

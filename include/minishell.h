@@ -26,6 +26,7 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
+# include <errno.h>
 
 typedef struct s_info
 {
