@@ -44,18 +44,16 @@ int	go_last(t_info *info)
 
 int	go_path(t_info *info, char **args)
 {
-	char	*path;
 
 	g_status = 0;
-	path = get_env_value("HOME", info->envp, 4);
-	if (chdir(path))
+	if (chdir(args[1]))
 	{
-		printf("%s%s%s\n", args[0],
-			": no such file or directory: ", args[1]);
-		g_status = 1;
+		if (errno == ENOENT)
+			print_error(4, args[1], 1);
+		else
+			print_error(5, args[1], 1);
 	}
 	update_pwd(info);
-	free(path);
 	return (g_status);
 }
 
