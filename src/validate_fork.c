@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:09:40 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/15 13:21:21 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:48:55 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	*redir_process(t_list *cmd, int fd[2])
 	if (c->ifile != STDIN_FILENO)
 	{
 		if (dup2(c->ifile, STDIN_FILENO) == -1)
-			return (error(1));
+			return (print_error(10, NULL, 1));
 		close (c->ifile);
 	}
 	if (c->ofile != STDOUT_FILENO)
 	{
 		if (dup2(c->ofile, STDOUT_FILENO) == -1)
-			return (error(1));
+			return (print_error(10, NULL, 1));
 		close(c->ofile);
 	}
 	else if (cmd->next && dup2(fd[1], STDOUT_FILENO) == -1)
-		return (error(1));
+		return (print_error(10, NULL, 1));
 	close(fd[1]);
 	return ("");
 }
@@ -74,6 +74,7 @@ void	exc_fork(t_info *info, t_list *cmds, int p_fd[2])
 	{
 		close(p_fd[0]);
 		close(p_fd[1]);
+		print_error(9, NULL, 2);
 	}
 	else if (!pid)
 		child_process(info, cmds, p_fd);

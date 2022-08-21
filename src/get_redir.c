@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:36:01 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/06 15:36:02 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:27:48 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	if (!path)
 		return (-1);
 	if (access(path, F_OK) == -1 && !flags[0])
-		write(1, "error", 5);
+		print_error(4, path, 127);
 	else if (!flags[0] && access(path, R_OK) == -1)
-		write(1, "error", 5);
+		print_error(5, path, 126);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
-		write(1, "error", 5);
+		print_error(5, path, 126);
 	if (flags[0] && flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (flags[0] && !flags[1])

@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:52:20 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/16 18:44:18 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:45:57 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ static t_commands	*get_params(t_commands *node, char **args[2], int *i)
 		else if (args[0][*i][0] != '|')
 			node->full_cmd = add_value_matrix(node->full_cmd, args[1][*i]);
 		else
+		{
+			print_error(8, NULL, 2);
 			*i = -2;
+		}
+
 		return (node);
 	}
-	print_error(1, NULL, 2);
+	print_error(8, NULL, 2);
 	*i = -2;
 	return (node);
 }

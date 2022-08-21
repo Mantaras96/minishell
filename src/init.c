@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:42:39 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/15 17:16:42 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:24:19 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ void	mini_getpid(t_info *info)
 	pid_t	pid;
 
 	pid = fork();
-	if (pid < 0 || !pid)
-		exit(1);
+	if (pid < 0 || !pid){
+		print_error(7, NULL, 1);
+		exit(1);		
+	}
+
 	waitpid(pid, NULL, 0);
 	info->pid = pid - 1;
 }
@@ -57,6 +60,7 @@ void	init_prompt(t_info *info)
 	pid = fork();
 	if (!pid)
 	{
+		print_error(7, NULL, 1);
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);

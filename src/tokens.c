@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:21:46 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/16 17:14:03 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:37:20 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ char	**ft_split_all(char *str, t_info *info)
 	return (buff);
 }
 
-//aqui empieza la fumada padre, aqui basicamente guardamos 
-//las palabras, que habran a partir de nuestro contador de antes
 char	**create_tokens(t_info *info)
 {
 	char	**str;

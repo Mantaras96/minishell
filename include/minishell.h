@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 13:21:51 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/20 12:12:01 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:18:27 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		**parsing(t_info *info);
 void		counter(t_info *info);
 int			simples(int i, t_info *info);
 int			doubles(int i, t_info *info);
-char 		**create_tokens(t_info *info);
+char		**create_tokens(t_info *info);
 int			create_doubles(int i, t_info *info);
 int			create_simples(int i, t_info *info);
 int			create_word(t_info *info, int i, char charact);
@@ -98,14 +98,15 @@ int			get_cd(t_info *info);
 int			go_home(t_info *info, char **args);
 void		update_pwd(t_info *info);
 //Expanding
-char 		**expanding(t_info *info, char **args);
-char		*expand_home(char *str, int i, int quotes[2], t_info *info, char *home);
+char		**expanding(t_info *info, char **args);
+char		*expand_home(char *str, int i, int quotes[2],
+				t_info *info, char *home);
 void		execute_other_commands(t_info *info);
 void		get_other(t_info *info);
 char		*validate_command(char **paths, char *command);
 void		get_path(t_info *info);
 int			is_builtin(t_commands *n);
-t_list	*create_nodes(char **args, int i);
+t_list		*create_nodes(char **args, int i);
 t_commands	*command_init(void);
 t_commands	*get_outfile2(t_commands *node, char **temp2, int *i);
 t_commands	*get_outfile1(t_commands *node, char **temp2, int *i);
@@ -118,7 +119,7 @@ void		*check_status(t_info *info, t_list *cmds, char **args);
 char		**ft_cmdsubsplit(char const *s, char *set);
 char		**ft_matrix_replace_in(char ***big, char **small, int n);
 char		**remove_quotes(char **tokens);
-void	*start_args(char *str, t_info *info);
+void		*start_args(char *str, t_info *info);
 void		free_cnt(void *content);
 int			heredoc(char *str[2], char *aux[2]);
 char		*here_str(char *str[2], size_t len, char *aux_1, char *aux_2);
@@ -129,5 +130,5 @@ void		init_info(t_info *info, char **envp, char **argv);
 int			signal_handler(void);
 void		*exec_command(t_info *info, t_list *cmds);
 void		init_env(t_info *info, char **argv);
-void		*print_error (int c_err, char *param, int err);
+void		*print_error(int c_err, char *param, int err);
 #endif

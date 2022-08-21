@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:19:43 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/20 12:13:06 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:28:19 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ void	get_command(t_info *info, t_list *cmds, char **s, char *path)
 	c = cmds->content;
 	dir = get_dir(info, cmds, &s, path);
 	if (!is_builtin(c) && c && c->full_cmd && dir)
-		print_error(1, *c->full_cmd, 126); // Es un directorio
+		print_error(3, *c->full_cmd, 126);
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, F_OK) == -1)
-		print_error(1, c->full_path, 127); // No es un directorio
+		print_error(4, c->full_path, 127);
 	else if (!is_builtin(c) && c && c->full_path
 		&& access(c->full_path, X_OK) == -1)
-		print_error(1, c->full_path, 126); // No tiene permisos.
+		print_error(5, c->full_path, 126);
 	if (dir)
 		closedir(dir);
 	free_matrix(&s);
@@ -122,7 +122,7 @@ void	*exec_command(t_info *info, t_list *cmds)
 
 	get_command(info, cmds, NULL, NULL);
 	if (pipe(p_fd) == -1)
-		write(1, "pError", 6);
+		print_error(6, NULL, 1);
 	if (!validate_fork(info, cmds, p_fd))
 		return (NULL);
 	close(p_fd[1]);

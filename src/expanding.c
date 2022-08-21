@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerida- <tmerida-@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 16:06:12 by tmerida-          #+#    #+#             */
-/*   Updated: 2022/08/06 16:10:21 by tmerida-         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:17:09 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ char	**expanding(t_info *info, char **args)
 	while (args && args[i])
 	{
 		args[i] = expand_vars(args[i], -1, info);
-		args[i] = expand_home(args[i], -1, quotes, info, get_env_value("HOME", info->envp, 4));
+		args[i] = expand_home(args[i], -1, quotes, info,
+				get_env_value("HOME", info->envp, 4));
 		aux = ft_cmdsubsplit(args[i], "><|");
 		ft_matrix_replace_in(&args, aux, i);
 		i += ft_matrix_len(aux) - 1;

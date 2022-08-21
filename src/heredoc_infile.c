@@ -6,7 +6,7 @@
 /*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:34:19 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/15 13:11:50 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/21 12:30:15 by amantara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	heredoc(char *str[2], char *aux[2])
 	g_status = 0;
 	if (pipe(fd) == -1)
 	{
-		error(1);
+		print_error(6, NULL, 1);
 		return (-1);
 	}
 	str[1] = here_str(str, 0, aux[0], aux[1]);
