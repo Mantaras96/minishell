@@ -14,7 +14,7 @@
 
 extern int	g_status;
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp2(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;
 
@@ -34,7 +34,7 @@ char	*here_str(char *str[2], size_t len, char *aux_1, char *aux_2)
 {
 	char	*temp;
 
-	while (g_status != 130 && (!str[0] || ft_strncmp(str[0], aux_1, len) \
+	while (g_status != 130 && (!str[0] || ft_strncmp2(str[0], aux_1, len) \
 		|| ft_strlen(aux_1) != len))
 	{
 		temp = str[1];

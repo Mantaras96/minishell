@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "../src/libft.h"
 # include "./get_next_line.h"
 # include <readline/history.h>
 # include <readline/readline.h>
