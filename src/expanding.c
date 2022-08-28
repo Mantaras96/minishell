@@ -85,7 +85,7 @@ char	**expanding(t_info *info, char **args)
 	while (args && args[i])
 	{
 		args[i] = expand_vars(args[i], -1, info);
-		args[i] = expand_home(args[i], -1, quotes, info,
+		args[i] = expand_home(args[i], -1, quotes,
 				get_env_value("HOME", info->envp, 4));
 		aux = ft_cmdsubsplit(args[i], "><|");
 		ft_matrix_replace_in(&args, aux, i);
@@ -96,7 +96,7 @@ char	**expanding(t_info *info, char **args)
 	return (args);
 }
 
-char	*expand_home(char *str, int i, int quotes[2], t_info *info, char *home)
+char	*expand_home(char *str, int i, int quotes[2], char *home)
 {
 	char	*path;
 	char	*aux;
@@ -118,7 +118,7 @@ char	*expand_home(char *str, int i, int quotes[2], t_info *info, char *home)
 			str = ft_strjoin(path, aux);
 			free(aux);
 			free(path);
-			return (expand_home(str, i + ft_strlen(home) - 1, quotes, info, home));
+			return (expand_home(str, i + ft_strlen(home) - 1, quotes, home));
 		}
 	}
 	free(home);

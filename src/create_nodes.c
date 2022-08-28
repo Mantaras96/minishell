@@ -69,7 +69,6 @@ static t_commands	*get_params(t_commands *node, char **args[2], int *i)
 			print_error(8, NULL, 2);
 			*i = -2;
 		}
-
 		return (node);
 	}
 	print_error(8, NULL, 2);

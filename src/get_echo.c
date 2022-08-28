@@ -28,8 +28,6 @@ int	get_echo(t_commands *info)
 	{
 		ft_putstr_fd(info->full_cmd[i], 1);
 		i++;
-		if (info->full_cmd[i])
-			ft_putchar_fd(' ', 1);
 	}
 	return (write(1, "\n", flag) == 2);
 }

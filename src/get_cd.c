@@ -44,7 +44,6 @@ int	go_last(t_info *info)
 
 int	go_path(t_info *info, char **args)
 {
-
 	g_status = 0;
 	if (chdir(args[1]))
 	{

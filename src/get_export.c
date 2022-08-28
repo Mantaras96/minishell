@@ -28,7 +28,7 @@ int	var_in_envp(char *argv, char **envp, int *j)
 		{
 			*j = i;
 			return (1);
-		}
+		}  
 		i++;
 	}
 	*j = i;
@@ -63,6 +63,11 @@ int	get_export(t_info *info)
 	i = 1;
 	j = 0;
 	argv = ((t_commands *)info->cmds->content)->full_cmd;
+	// while (argv[j])
+	// {
+	// 	printf("Export: %s\n", argv[j]);
+	// 	j++;
+	// }
 	if (info->counter >= 2)
 	{
 		while (i < info->counter)

@@ -58,9 +58,9 @@ void	*check_status(t_info *info, t_list *cmds, char **args)
 {
 	int			i;
 	int			num_exit;
-	t_list		*cmd_2;
 
 	num_exit = 0;
+	(void)cmds;
 	info->cmds = create_nodes(args, -1);
 	if (!info->cmds)
 		return (info);
@@ -93,9 +93,18 @@ void	*start_args(char *str, t_info *info)
 		add_history(str);
 	args = parsing(info);
 	free(str);
-	args = expanding(info, args);
-	info = check_status(info, info->cmds, args);
-	if (info && info->cmds)
-		ft_lstclear(&info->cmds, free_cnt);
+			int j = 0;
+		while (args[j])
+		{
+			printf("Temp: %s\n", args[j]);
+			j++;
+		}
+	if (args != NULL)
+	{
+		args = expanding(info, args);
+		info = check_status(info, info->cmds, args);
+		if (info && info->cmds)
+			ft_lstclear(&info->cmds, free_cnt);
+	}
 	return (info);
 }

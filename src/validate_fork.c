@@ -20,7 +20,6 @@ void	*redir_process(t_list *cmd, int fd[2])
 
 	c = cmd->content;
 	if (c->ifile != STDIN_FILENO)
-	
 	{
 		if (dup2(c->ifile, STDIN_FILENO) == -1)
 			return (print_error(10, NULL, 1));
@@ -42,6 +41,7 @@ void	builtin_process(t_info *info, t_list *cmds, t_commands *c)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	(void)cmds;
 	if (!is_builtin(c) && c->full_cmd)
 		execve(c->full_path, c->full_cmd, info->envp);
 	else if (c->full_cmd && !ft_strcmp(*c->full_cmd, "pwd"))

@@ -36,11 +36,17 @@ void	mini_getpid(t_info *info)
 	pid_t	pid;
 
 	pid = fork();
-	if (pid < 0 || !pid){
-		print_error(7, NULL, 1);
-		exit(1);		
+	if (pid < 0)
+	{
+		print_error(9, NULL, 1);
+		free_matrix(&info->envp);
+		exit(1);
 	}
-
+	if (!pid)
+	{
+		free_matrix(&info->envp);
+		exit(1);
+	}
 	waitpid(pid, NULL, 0);
 	info->pid = pid - 1;
 }

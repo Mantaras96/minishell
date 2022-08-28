@@ -100,7 +100,7 @@ void		update_pwd(t_info *info);
 //Expanding
 char		**expanding(t_info *info, char **args);
 char		*expand_home(char *str, int i, int quotes[2],
-				t_info *info, char *home);
+				char *home);
 void		execute_other_commands(t_info *info);
 void		get_other(t_info *info);
 char		*validate_command(char **paths, char *command);

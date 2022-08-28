@@ -80,7 +80,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
-	$(CC) -c  -I ~/.brew/opt/readline/include -o $@ $^
+	$(CC) -c $(CFLAGS) -I ~/.brew/opt/readline/include -o $@ $^
 
 all:	$(NAME)
 
@@ -93,7 +93,6 @@ clean:
 	@rm -rf ./objs
 
 fclean:	clean
-	@make fclean -C ./libft
 	@rm -f $(NAME)
 
 re:	fclean all

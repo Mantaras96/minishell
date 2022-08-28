@@ -33,8 +33,6 @@ void	handler(int signum)
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	*info;
-	char	*str;
-	char	*out;
 
 	(void)argc;
 	info = (t_info *)malloc(sizeof(t_info));
@@ -42,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	if (signal_handler() == 0)
 		return (0);
 	while (42)
-	{
+	{ 
 		init_prompt(info);
 		if (!start_args(info->input, info))
 			break ;
