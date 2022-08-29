@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albertmantaras <albertmantaras@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:21:46 by amantara          #+#    #+#             */
-/*   Updated: 2022/08/21 12:37:20 by amantara         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:26:48 by albertmanta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int ft_is_space2(char c){
+    if (c == ' ' || c == '\t' || c == '\n'){
+        return (1);
+    }
+    return (0);
+}
+
+int count_words(char *str){
+    int i;
+    int words;
+
+    i = 0;
+    words = 0;
+    while(str[i]){
+        while(str[i] && ft_is_space2(str[i]))
+            i++;
+        if (str[i] && !ft_is_space2(str[i])){
+            words++;
+            while(str[i] && !ft_is_space2(str[i])){
+                i++;
+            }
+        }
+    }
+    return (words);
+}
 
 int	ft_is_space(char c, int comillas)
 {
@@ -84,9 +110,8 @@ char	**ft_split_all(char *str, t_info *info)
 char	**create_tokens(t_info *info)
 {
 	char	**str;
-	int		i;
-
-	i = 0;
+	info->counter = count_words(info->input);
+	// printf ("\nContador: %d\n", info->counter);
 	str = ft_split_all(info->input, info);
 	return (str);
 }
