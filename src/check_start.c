@@ -93,12 +93,6 @@ void	*start_args(char *str, t_info *info)
 		add_history(str);
 	args = parsing(info);
 	free(str);
-			int j = 0;
-		while (args[j])
-		{
-			printf("Temp: %s\n", args[j]);
-			j++;
-		}
 	if (args != NULL)
 	{
 		args = expanding(info, args);

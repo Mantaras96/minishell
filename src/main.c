@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	if (signal_handler() == 0)
 		return (0);
 	while (42)
-	{ 
+	{
 		init_prompt(info);
 		if (!start_args(info->input, info))
 			break ;

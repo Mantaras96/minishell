@@ -19,7 +19,7 @@ int	var_in_envp(char *argv, char **envp, int *j)
 
 	i = 0;
 	*j = 0;
-	pos = ft_strchr_i(argv, 61);
+	pos = ft_strchr_i(argv, '=');
 	if (pos == -1)
 		return (-1);
 	while (envp[i])
@@ -28,7 +28,7 @@ int	var_in_envp(char *argv, char **envp, int *j)
 		{
 			*j = i;
 			return (1);
-		}  
+		}
 		i++;
 	}
 	*j = i;
@@ -63,11 +63,6 @@ int	get_export(t_info *info)
 	i = 1;
 	j = 0;
 	argv = ((t_commands *)info->cmds->content)->full_cmd;
-	// while (argv[j])
-	// {
-	// 	printf("Export: %s\n", argv[j]);
-	// 	j++;
-	// }
 	if (info->counter >= 2)
 	{
 		while (i < info->counter)
@@ -93,9 +88,9 @@ int	count_var_envp(char *token, char **envp, int *j)
 
 	i = 0;
 	aux = search_value_string(token, '=');
-	if (!aux)
+	if (aux == -1)
 		return (-1);
-	while (i < ft_matrix_len(envp) - 1)
+	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], token, aux + 1))
 			return (1);

@@ -58,6 +58,8 @@ typedef struct s_split
 	int	k;
 	int	comillas;
 	int	size;
+	int	q_1;
+	int	q_2;
 }	t_split;
 
 int			get_pwd(void);

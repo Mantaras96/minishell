@@ -104,8 +104,6 @@ char	**parsing(t_info *info)
 	if (start_parsing(info))
 	{
 		info->counter = 0;
-		counter(info);
-		printf("COUNTER: \n%d", info->counter);
 		info->simples = 0;
 		info->doubles = 0;
 		return (create_tokens(info));

@@ -21,5 +21,7 @@ t_split	start_split(void)
 	split.j = 0;
 	split.k = 0;
 	split.size = 0;
+	split.q_1 = 0;
+	split.q_2 = 0;
 	return (split);
 }

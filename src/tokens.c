@@ -12,106 +12,74 @@
 
 #include "../include/minishell.h"
 
-int ft_is_space2(char c){
-    if (c == ' ' || c == '\t' || c == '\n'){
-        return (1);
-    }
-    return (0);
-}
-
-int count_words(char *str){
-    int i;
-    int words;
-
-    i = 0;
-    words = 0;
-    while(str[i]){
-        while(str[i] && ft_is_space2(str[i]))
-            i++;
-        if (str[i] && !ft_is_space2(str[i])){
-            words++;
-            while(str[i] && !ft_is_space2(str[i])){
-                i++;
-            }
-        }
-    }
-    return (words);
-}
-
-int	ft_is_space(char c, int comillas)
+static int	count_words(const char *s, char *c, int i[2])
 {
-	if (!comillas)
+	int		q[2];
+
+	q[0] = 0;
+	q[1] = 0;
+	while (s[i[0]] != '\0')
 	{
-		if (c == ' ' || c == '\t' || c == '\n' || c == 39 || c == 34)
-			return (1);
+		if (!ft_strchr(c, s[i[0]]))
+		{
+			i[1]++;
+			while ((!ft_strchr(c, s[i[0]]) || q[0]) && s[i[0]] != '\0')
+			{
+				if (!q[1] && (s[i[0]] == '\"' || s[i[0]] == '\''))
+					q[1] = s[i[0]];
+				q[0] = (q[0] + (s[i[0]] == q[1])) % 2;
+				q[1] *= q[0] != 0;
+				i[0]++;
+			}
+			if (q[0])
+				return (-1);
+		}
+		else
+			i[0]++;
 	}
-	else
-	{
-		if (c == 39 || c == 34)
-			return (1);
-	}
-	return (0);
+	return (i[1]);
 }
 
-void	jump_spaces_more(char *str, t_split *split)
-{
-	while (str[split->i] && ft_is_space(str[split->i], split->comillas))
-	{
-		if (str[split->i] == 39 || str[split->i] == 34)
-			split->comillas = 1;
-		split->i++;
-	}
-	while (str[split->i] && !ft_is_space(str[split->i], split->comillas))
-	{
-		split->size++;
-		split->i++;
-	}
-}
-
-char	**create_buff(char **buff, t_split *split)
-{
-	if (split->comillas)
-	{
-		buff[split->j] = malloc(sizeof (char) * (split->size + 3));
-		split->size = split->size + 2;
-		split->i++;
-	}
-	else
-		buff[split->j] = malloc(sizeof (char) * (split->size + 1));
-	return (buff);
-}
-
-char	**ft_split_all(char *str, t_info *info)
+// a_split: Array with malloc nwords.
+char	**ft_split_all(char *str, t_info *info, char **a_split)
 {
 	t_split	split;
 	char	**buff;
+	int		s_len;
 
 	buff = (char **)malloc(sizeof (char *) * (info->counter + 1));
 	split = start_split();
-	while (str[split.i] && split.j < info->counter)
+	s_len = ft_strlen(str);
+	while (str[split.i])
 	{
-		jump_spaces_more(str, &split);
-		buff = create_buff(buff, &split);
-		split.k = 0;
-		while (split.size)
+		while (ft_strchr(" ", str[split.i]) && str[split.i] != '\0')
+			split.i++;
+		split.j = split.i;
+		while ((!ft_strchr(" ", str[split.i]) || split.q_1 || split.q_2)
+			&& str[split.i])
 		{
-			buff[split.j][split.k] = str[split.i - split.size];
-			split.size--;
-			split.k++;
+			split.q_1 = (split.q_1 + (!split.q_2 && str[split.i] == '\'')) % 2;
+			split.q_2 = (split.q_2 + (!split.q_1 && str[split.i] == '\"')) % 2;
+			split.i++;
 		}
-		buff[split.j][split.k] = '\0';
-		split.j++;
-		split.comillas = 0;
+		if (split.j >= s_len)
+			a_split[split.k++] = "\0";
+		else
+			a_split[split.k++] = ft_substr(str, split.j, split.i - split.j);
 	}
-	buff[split.j] = 0;
-	return (buff);
+	return (a_split);
 }
 
 char	**create_tokens(t_info *info)
 {
 	char	**str;
-	info->counter = count_words(info->input);
-	// printf ("\nContador: %d\n", info->counter);
-	str = ft_split_all(info->input, info);
+	int		i[2];
+
+	i[0] = 0;
+	i[1] = 0;
+	info->counter = count_words(info->input, " ", i);
+	str = malloc((info->counter + 1) * sizeof(char *));
+	str = ft_split_all(info->input, info, str);
+	str[info->counter] = NULL;
 	return (str);
 }
