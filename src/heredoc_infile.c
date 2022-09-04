@@ -61,6 +61,7 @@ int	heredoc(char *str[2], char *aux[2])
 	int	fd[2];
 
 	g_status = 0;
+	printf("FD0: %d, FD1: %d", fd[0],fd[1]);
 	if (pipe(fd) == -1)
 	{
 		print_error(6, NULL, 1);

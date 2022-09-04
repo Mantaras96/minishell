@@ -12,64 +12,6 @@
 
 #include "../include/minishell.h"
 
-int	doubles(int i, t_info *info)
-{
-	info->doubles--;
-	if (info->input[i] == 34)
-		i++;
-	else if (info->doubles != 0)
-	{
-		info->counter++;
-		while (info->input[i] && info->input[i] != 34)
-		{
-			if (info->input[i] == 39)
-				info->simples--;
-			i++;
-		}
-	}
-	return (i + 1);
-}
-
-int	simples(int i, t_info *info)
-{
-	info->simples--;
-	if (info->input[i] == 39)
-		i++;
-	else if (info->simples != 0)
-	{
-		info->counter++;
-		while (info->input[i] && info->input[i] != 39)
-		{
-			if (info->input[i] == 34)
-				info->doubles--;
-			i++;
-		}
-	}
-	return (i + 1);
-}
-
-void	counter(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (info->input[i])
-	{
-		if (info->input[i] == 32)
-			i++;
-		else if (info->input[i] == 34)
-			i = doubles(i + 1, info);
-		else if (info->input[i] == 39)
-			i = simples(i + 1, info);
-		else
-		{
-			info->counter++;
-			while (info->input[i] && info->input[i] != 32)
-				i++;
-		}
-	}
-}
-
 int	start_parsing(t_info *info)
 {
 	int	i;

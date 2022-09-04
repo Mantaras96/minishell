@@ -41,13 +41,11 @@ static int	count_words(const char *s, char *c, int i[2])
 }
 
 // a_split: Array with malloc nwords.
-char	**ft_split_all(char *str, t_info *info, char **a_split)
+char	**ft_split_all(char *str, char **a_split)
 {
 	t_split	split;
-	char	**buff;
 	int		s_len;
 
-	buff = (char **)malloc(sizeof (char *) * (info->counter + 1));
 	split = start_split();
 	s_len = ft_strlen(str);
 	while (str[split.i])
@@ -79,7 +77,7 @@ char	**create_tokens(t_info *info)
 	i[1] = 0;
 	info->counter = count_words(info->input, " ", i);
 	str = malloc((info->counter + 1) * sizeof(char *));
-	str = ft_split_all(info->input, info, str);
+	str = ft_split_all(info->input, str);
 	str[info->counter] = NULL;
 	return (str);
 }
