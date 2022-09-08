@@ -12,6 +12,8 @@
 
 #include "../include/minishell.h"
 
+extern int g_status;
+
 int	var_in_envp(char *argv, char **envp, int *j)
 {
 	int	pos;
@@ -73,12 +75,18 @@ int	get_export(t_info *info)
 				free(info->envp[j]);
 				info->envp[j] = ft_strdup(argv[i]);
 			}
-			else if (!pos)
+			else if (!pos){
+				if (check_digit(ft_split(argv[1], '=')) == 1)
+				{
+					print_error(11, argv[1], 1);
+					break ;
+				}
 				info->envp = add_value_matrix(info->envp, argv[i]);
+			}
 		i++;
 		}
 	}
-	return (0);
+	return (g_status);
 }
 
 int	count_var_envp(char *token, char **envp, int *j)

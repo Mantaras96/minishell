@@ -80,7 +80,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $(CFLAGS) -I ~/.brew/opt/readline/include -o $@ $^
+	$(CC) -c  -I ~/.brew/opt/readline/include -o $@ $^
 
 all:	$(NAME)
 

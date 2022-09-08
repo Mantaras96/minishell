@@ -23,8 +23,10 @@ int	builtin(t_info *info, t_list *cmds, int *num_exit)
 		c_full = ((t_commands *)cmds->content)->full_cmd;
 		if (c_full && !ft_strcmp (c_full[0], "exit"))
 			g_status = get_exit(info, num_exit);
-		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "export"))
+		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "export") && c_full[1])
 			g_status = get_export(info);
+		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "export") && c_full[1] == NULL)
+			g_status = get_only_export(info);
 		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "cd"))
 			g_status = get_cd(info);
 		else if (!cmds->next && c_full && !ft_strcmp(c_full[0], "unset"))

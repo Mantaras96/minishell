@@ -133,4 +133,6 @@ int			signal_handler(void);
 void		*exec_command(t_info *info, t_list *cmds);
 void		init_env(t_info *info, char **argv);
 void		*print_error(int c_err, char *param, int err);
+int	get_only_export(t_info *info);
+int check_digit(char **argv);
 #endif
