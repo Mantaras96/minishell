@@ -59,18 +59,7 @@ void	init_prompt(t_info *info)
 	aux = ft_strjoin("\033[1;33m", str);
 	free(str);
 	info->prompt = ft_strjoin(aux, "--ENCUERAO🦄🦹--->$ \033[1;00m");
-	pipe(fd);
-	pid = fork();
-	if (!pid)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		exit (1);
-	}
-	close(fd[1]);
-	waitpid(pid, NULL, 0);
-	close(fd[0]);
+	init_pid(fd, pid);
 	info->input = readline(info->prompt);
 	free(aux);
 	free(info->prompt);

@@ -137,4 +137,5 @@ void		*print_error(int c_err, char *param, int err);
 int			get_only_export(t_info *info);
 int			check_digit(char **argv);
 void		prepare_signals_blocked(void);
+void		init_pid(int fd[2], pid_t pid);
 #endif

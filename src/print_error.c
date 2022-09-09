@@ -98,3 +98,19 @@ char	**add_value_matrix2(char **matrix, char *newstr)
 	free_matrix(&matrix);
 	return (n_matrix);
 }
+
+void init_pid(int fd[2], pid_t pid)
+{
+	pipe(fd);
+	pid = fork();
+	if (!pid)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		exit (1);
+	}
+	close(fd[1]);
+	waitpid(pid, NULL, 0);
+	close(fd[0]);
+}
