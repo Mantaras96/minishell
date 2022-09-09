@@ -17,13 +17,11 @@ int	signal_handler(void)
 	struct termios	termi;
 
 	if (tcgetattr(STDIN_FILENO, &termi) == -1)
-	{	
 		return (0);
-	}
 	termi.c_lflag &= ~(ECHOCTL);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &termi) == -1)
 		return (0);
-	if (signal(SIGINT, handler))
+	if (signal(SIGINT, handler) == SIG_ERR)
 		return (0);
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (0);

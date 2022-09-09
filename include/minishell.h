@@ -80,6 +80,7 @@ void		handler(int signum);
 //Utils matrix (utils_matrix.c)
 void		free_matrix(char ***matrix);
 char		**add_value_matrix(char **matrix, char *newstr);
+char		**add_value_matrix2(char **matrix, char *newstr);
 int			ft_matrix_len(char **matrix);
 char		**ft_strdup_matrix(char **matrix);
 char		**matrix_delete_element(char **matrix, int j);
@@ -133,6 +134,7 @@ int			signal_handler(void);
 void		*exec_command(t_info *info, t_list *cmds);
 void		init_env(t_info *info, char **argv);
 void		*print_error(int c_err, char *param, int err);
-int	get_only_export(t_info *info);
-int check_digit(char **argv);
+int			get_only_export(t_info *info);
+int			check_digit(char **argv);
+void		prepare_signals_blocked(void);
 #endif

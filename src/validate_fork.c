@@ -39,8 +39,6 @@ void	*redir_process(t_list *cmd, int fd[2])
 
 void	builtin_process(t_info *info, t_list *cmds, t_commands *c)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	(void)cmds;
 	if (!is_builtin(c) && c->full_cmd)
 		execve(c->full_path, c->full_cmd, info->envp);

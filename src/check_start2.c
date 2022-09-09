@@ -120,6 +120,7 @@ void	*exec_command(t_info *info, t_list *cmds)
 {
 	int	p_fd[2];
 
+	prepare_signals_blocked();
 	get_command(info, cmds, NULL, NULL);
 	if (pipe(p_fd) == -1)
 		print_error(6, NULL, 1);

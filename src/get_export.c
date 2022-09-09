@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-extern int g_status;
+extern int	g_status;
 
 int	var_in_envp(char *argv, char **envp, int *j)
 {
@@ -62,12 +62,12 @@ int	get_export(t_info *info)
 	int		pos;
 	char	**argv;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	argv = ((t_commands *)info->cmds->content)->full_cmd;
 	if (info->counter >= 2)
 	{
-		while (i < info->counter)
+		while (++i < info->counter)
 		{
 			pos = count_var_envp(argv[i], info->envp, &j);
 			if (pos == 1)
@@ -75,15 +75,10 @@ int	get_export(t_info *info)
 				free(info->envp[j]);
 				info->envp[j] = ft_strdup(argv[i]);
 			}
-			else if (!pos){
-				if (check_digit(ft_split(argv[1], '=')) == 1)
-				{
-					print_error(11, argv[1], 1);
-					break ;
-				}
-				info->envp = add_value_matrix(info->envp, argv[i]);
+			else if (!pos)
+			{
+				info->envp = add_value_matrix2(info->envp, argv[i]);
 			}
-		i++;
 		}
 	}
 	return (g_status);

@@ -43,7 +43,6 @@ void	*print_error(int c_err, char *param, int err)
 	return (NULL);
 }
 
-
 int	get_only_export(t_info *info)
 {
 	int	i;
@@ -57,12 +56,45 @@ int	get_only_export(t_info *info)
 	return (0);
 }
 
-int check_digit(char **argv)
+int	check_digit(char **argv)
 {
-	int num = ft_atoi(argv[0]);
-	printf("%d", num);
-	if (num >= 0 && num <= 100)
-		return (1);
-	else
-		return (0);
+	int	i;
+
+	i = 0;
+	while (argv[0][i])
+	{
+		if (!ft_isdigit(argv[0][i]))
+		{
+			free_matrix(&argv);
+			return (0);
+		}
+		i++;
+	}
+	free_matrix(&argv);
+	return (1);
+}
+
+char	**add_value_matrix2(char **matrix, char *newstr)
+{
+	char	**n_matrix;
+	int		len;
+	int		i;
+
+	if (check_digit(ft_split(newstr, '=')))
+	{
+		print_error(11, newstr, 1);
+		return (matrix);
+	}
+	i = 0;
+	len = ft_matrix_len(matrix);
+	n_matrix = malloc(sizeof(char *) * (ft_matrix_len(matrix) + 2));
+	n_matrix[len + 1] = NULL;
+	while (i < len)
+	{
+		n_matrix[i] = ft_strdup(matrix[i]);
+		i++;
+	}
+	n_matrix[i] = ft_strdup(newstr);
+	free_matrix(&matrix);
+	return (n_matrix);
 }
