@@ -55,6 +55,7 @@ void	init_prompt(t_info *info)
 	pid_t	pid;
 	int		fd[2];
 
+	pid = 0;
 	str = getcwd(NULL, 0);
 	aux = ft_strjoin("\033[1;33m", str);
 	free(str);
